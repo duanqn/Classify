@@ -45,6 +45,8 @@ class Student{
   bool isMale(){
     return m_gender == Male;
   }
+
+  void fillScoreVector(std::vector<double> &res);
   
   virtual bool isPinned();
   virtual bool pin(); // returns successful or not

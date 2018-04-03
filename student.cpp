@@ -12,6 +12,13 @@ Student::Student(int subject): m_numSubject(subject){
 Student::~Student(){
 }
 
+void Student::fillScoreVector(std::vector<double> &res){
+  res.clear();
+  for(int i = 0; i < m_numSubject; ++i){
+    res.push_back(m_score[i]);
+  }
+}
+
 std::istream & operator >>(std::istream &is, Student &s){
   is >> s.m_name;
   int tmp;
