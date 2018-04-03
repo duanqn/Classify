@@ -14,7 +14,7 @@ class Student{
   int m_serial;
   
   int m_numSubject;
-  
+
   //  学生信息：
   //  姓名、性别、成绩
   std::string m_name;
@@ -49,8 +49,6 @@ class Student{
   virtual bool isPinned();
   virtual bool pin(); // returns successful or not
   
-  // friend std::wistream & operator >> (std::wistream &is, Student &s);
-  // friend std::wostream & operator << (std::wostream &wos, Student &s);
   friend std::istream & operator >> (std::istream &is, Student &s);
   friend std::ostream & operator << (std::ostream &os, Student &s);
 };

@@ -17,7 +17,6 @@ void Class::appendAndSetClass(Student *t){
   t->setClass(this);
 }
 
-
 Student * Class::popRandomFreeElement(){
   int r;
   auto it = m_students.begin();
