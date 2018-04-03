@@ -14,6 +14,7 @@ class Student{
   int m_serial;
   
   int m_numSubject;
+  
   //  学生信息：
   //  姓名、性别、成绩
   std::string m_name;

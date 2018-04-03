@@ -12,28 +12,6 @@ Student::Student(int subject): m_numSubject(subject){
 Student::~Student(){
 }
 
-/*
-std::wistream & operator >>(std::wistream &wis, Student &s){
-  wis >> s.m_name;
-  int tmp;
-  wis >> tmp;
-  if(tmp == 1){
-    s.m_gender = Student::Male;
-  }
-  else{
-    s.m_gender = Student::Female;
-  }
-  
-  s.m_score.clear();
-  double tmpscore;
-  for(int i = 0; i < s.m_numSubject; ++i){
-    wis >> tmpscore;
-    s.m_score.push_back(tmpscore);
-  }
-  
-  return wis;
-}
-*/
 std::istream & operator >>(std::istream &is, Student &s){
   is >> s.m_name;
   int tmp;

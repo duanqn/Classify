@@ -6,7 +6,6 @@
 class Class{
   private:
   std::list<Student *> m_students;
-  // TODO: USE LIST INSTEAD
   public:
   Class();
   ~Class();

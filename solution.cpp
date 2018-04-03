@@ -67,14 +67,22 @@ void Solution::applyRandomMove(){
       s2 = vClass[c2]->popRandomFreeElement();
     }
     catch(HRESULT &code){
-      vClass[c1]->addStudentAndSetClass(s1);  // undo pop
+      vClass[c1]->appendAndSetClass(s1);  // undo pop
       successful = false;
       continue;
     }
     
-    vClass[c1]->addStudentAndSetClass(s2);
-    vClass[c2]->addStudentAndSetClass(s1);  // exchange
+    vClass[c1]->appendAndSetClass(s2);
+    vClass[c2]->appendAndSetClass(s1);  // exchange
   }while(!successful);  // TODO: abort after n failures
+}
+
+double Solution::evalEntropy(){
+  //要求：
+  //男女生数量
+  //各科平均分
+  //总平均分
+  //以上几项尽量接近
 }
 
 void Solution::output(FILE *f){
