@@ -3,6 +3,7 @@
 #include "common.h"
 #include "Student.h"
 #include <list>
+#include <vector>
 class Class{
   private:
   std::list<Student *> m_students;
@@ -12,6 +13,8 @@ class Class{
   void appendAndSetClass(Student *t);
   
   Student * popRandomFreeElement();
+
+  void fillAvgScoreVector(std::vector<double> &res);
   
   //friend std::wostream & operator << (std::wostream & wos, const Class &c);
   friend std::ostream & operator << (std::ostream & os, const Class &c);

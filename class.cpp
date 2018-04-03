@@ -46,14 +46,24 @@ Student * Class::popRandomFreeElement(){
   return res;
 }
 
-/*
-std::wostream & operator << (std::wostream & wos, const Class &c){
-  for(auto it = c.m_students.begin(); it != c.m_students.end(); ++it){
-    wos << **it;
+void Class::fillAvgScoreVector(std::vector<double> &res){
+  res.clear();
+  *(m_students.front)->fillScoreVector(res);
+  for(int i = 0; i < res.size(); ++i){
+    res[i] = 0;
   }
-  return wos;
+  std::vector<double> score;
+  for(auto it = m_students.begin(); it != m_students.end(); ++it){
+    (*it)->fillScoreVector(score);
+    for(int i = 0; i < res.size(); ++i){
+      res[i] += score[i];
+    }
+  }
+
+  for(int i = 0; i < res.size(); ++i){
+    res[i] /= m_students.size();
+  }
 }
-*/
 
 std::ostream & operator << (std::ostream & os, const Class &c){
   for(auto it = c.m_students.begin(); it != c.m_students.end(); ++it){
