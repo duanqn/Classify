@@ -83,6 +83,10 @@ double Solution::evalEntropy(){
   //各科平均分
   //总平均分
   //以上几项尽量接近
+  double entropy = 0;
+  double s2MNum = 0, s2FNum = 0;
+  double avgMNum = 0, avgFNum = 0;
+  
 }
 
 void Solution::output(FILE *f){
