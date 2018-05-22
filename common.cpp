@@ -1,10 +1,13 @@
 #include <cstdlib>
-#include <windows.h>
 #include "common.h"
+
+
 int randint(int upperbound){
   return (int)(rand()/(double)RAND_MAX * (upperbound - 1));
 }
 
+#ifdef _WIN32
+#include <windows.h>
 std::string toUTF8String(const wchar_t * str, int len){
   // Get the length of new string first
   int nChars = WideCharToMultiByte(CP_UTF8, 0, str, len, NULL, 0, NULL, NULL);
@@ -55,3 +58,15 @@ std::string toGB2312String(const std::wstring& str)
 {
 	return toGB2312String(str.c_str(), (int)str.size());
 }
+
+#elif __linux__
+std::string toUTF8String(const std::wstring& str)
+{
+	return toUTF8String(str.c_str(), (int)str.size());
+}
+
+std::string toGB2312String(const std::wstring& str)
+{
+	return toGB2312String(str.c_str(), (int)str.size());
+}
+#endif

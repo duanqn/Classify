@@ -1,5 +1,4 @@
 #include "class.h"
-#include <windows.h>
 
 Class::Class(){
 }
@@ -28,7 +27,7 @@ Student * Class::popRandomFreeElement(){
     }
   }
   if(found == false){
-    throw E_FAIL; // all elements are pinned
+    throw duanqn::E_FAIL; // all elements are pinned
   }
   found = false;
   while(!found){
@@ -47,8 +46,10 @@ Student * Class::popRandomFreeElement(){
 }
 
 void Class::fillAvgScoreVector(std::vector<double> &res){
+  // This function needs to be re-written!
+  // Don't use fillScoreVector to get the size
   res.clear();
-  *(m_students.front)->fillScoreVector(res);
+  *(m_students.front())->fillScoreVector(res);
   for(int i = 0; i < res.size(); ++i){
     res[i] = 0;
   }

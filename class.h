@@ -1,7 +1,7 @@
 #ifndef CLASS_H_
 #define CLASS_H_
 #include "common.h"
-#include "Student.h"
+#include "student.h"
 #include <list>
 #include <vector>
 class Class{
