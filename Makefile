@@ -39,6 +39,8 @@ SRC_FILES_CPP := $(wildcard *.cpp)
 OBJ_FILES_CPP := $(patsubst %.cpp,$(BUILD_DIR)$(SEP)%.oxx,$(SRC_FILES_CPP))
 SRC_FILES_C := $(wildcard *.c)
 OBJ_FILES_C := $(patsubst %.c,$(BUILD_DIR)$(SEP)%.o,$(SRC_FILES_C))
+HEADER_FILES := $(wildcard *.h)
+HEADER_FILES_TEMPLATE := $(wildcard *.hpp)
 
 OBJ_FILES := $(OBJ_FILES_C) $(OBJ_FILES_CPP)
 $(info $$OBJ_FILES is [$(OBJ_FILES)])
@@ -56,10 +58,10 @@ $(BUILD_DIR):
 $(BUILD_DIR)$(SEP)$(EXEC_NAME): $(OBJ_FILES)
 	$(LD) $(LDFLAGS) -o $@ $^
 
-$(BUILD_DIR)$(SEP)%.oxx: %.cpp
+$(BUILD_DIR)$(SEP)%.oxx: %.cpp $(HEADER_FILES) $(HEADER_FILES_TEMPLATE)
 	$(CC) $(CFLAGS) -c -o $@ $<
 
-$(BUILD_DIR)$(SEP)%.o: %.c
+$(BUILD_DIR)$(SEP)%.o: %.c $(HEADER_FILES) $(HEADER_FILES_TEMPLATE)
 	$(CC) $(CFLAGS) -c -o $@ $<
 
 clean:
