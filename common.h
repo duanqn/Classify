@@ -1,6 +1,7 @@
 #ifndef COMMON_H_
 #define COMMON_H_
 #include <string>
+#include "utf8.h"
 //#define NSUBJECT 3
 
 namespace duanqn{

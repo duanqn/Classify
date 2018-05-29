@@ -6,6 +6,16 @@ int randint(int upperbound){
   return (int)(rand()/(double)RAND_MAX * (upperbound - 1));
 }
 
+std::string GB2312toUTF8(const std::string& str){
+  int length = str.size() + 1;  // '\0'
+  char *tmp = new char[2 * length]; // UTF-8 encoding is likely to have greater length
+  gb_to_utf8(str.c_str(), tmp, 2 * length);
+  std::string res = std::string(tmp);
+  delete []tmp;
+  return res;
+}
+
+#if 0
 #ifdef _WIN32
 #include <windows.h>
 std::string toUTF8String(const wchar_t * str, int len){
@@ -72,4 +82,6 @@ std::string toGB2312String(const std::wstring& str)
 
 #else
   #error OS not supported
+#endif
+
 #endif
