@@ -3,7 +3,7 @@ LD = g++
 CFLAGS = -std=c++11 -O2
 LDFLAGS = 
 
-$(info HELLO2)
+$(info Building initiated...)
 
 ifeq ($(OS),Windows_NT)
 
@@ -35,8 +35,13 @@ endif
 $(info $$BUILD_DIR is [$(BUILD_DIR)])
 $(info $$MKDIR_P is [$(MKDIR_P)])
 
-SRC_FILES := $(wildcard *.cpp)
-OBJ_FILES := $(patsubst %.cpp,$(BUILD_DIR)$(SEP)%.o,$(SRC_FILES))
+SRC_FILES_CPP := $(wildcard *.cpp)
+OBJ_FILES_CPP := $(patsubst %.cpp,$(BUILD_DIR)$(SEP)%.oxx,$(SRC_FILES_CPP))
+SRC_FILES_C := $(wildcard *.c)
+OBJ_FILES_C := $(patsubst %.c,$(BUILD_DIR)$(SEP)%.o,$(SRC_FILES_C))
+
+OBJ_FILES := $(OBJ_FILES_C) $(OBJ_FILES_CPP)
+$(info $$OBJ_FILES is [$(OBJ_FILES)])
 EXEC_NAME = main
 
 .PHONY: dir
@@ -51,9 +56,13 @@ $(BUILD_DIR):
 $(BUILD_DIR)$(SEP)$(EXEC_NAME): $(OBJ_FILES)
 	$(LD) $(LDFLAGS) -o $@ $^
 
-$(BUILD_DIR)$(SEP)%.o: %.cpp
+$(BUILD_DIR)$(SEP)%.oxx: %.cpp
+	$(CC) $(CFLAGS) -c -o $@ $<
+
+$(BUILD_DIR)$(SEP)%.o: %.c
 	$(CC) $(CFLAGS) -c -o $@ $<
 
 clean:
 	$(RM_Q) $(BUILD_DIR)$(SEP)*.o
+	$(RM_Q) $(BUILD_DIR)$(SEP)*.oxx
 	$(RM_Q) $(BUILD_DIR)$(SEP)$(EXEC_NAME)
