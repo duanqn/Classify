@@ -1,3 +1,6 @@
+BUILD_DIR_NAME = build
+EXEC_NAME_PREFIX = classify
+
 CC = g++
 LD = g++
 CFLAGS = -std=c++11 -O2
@@ -8,10 +11,11 @@ $(info Building initiated...)
 ifeq ($(OS),Windows_NT)
 
 $(info Hello Windows)
-BUILD_DIR := .\build
+BUILD_DIR := .\$(BUILD_DIR_NAME)
 MKDIR_P := md
 MKDIR_CMD := if not exist $(BUILD_DIR) $(MKDIR_P) $(BUILD_DIR)
 RM_Q := del /q
+EXEC_NAME = $(EXEC_NAME_PREFIX).exe
 FixPath = $(subst /,\,$1)
 SEP = $(call FixPath,/)
 else
@@ -20,10 +24,11 @@ UNAME_S := $(shell uname -s)
 ifeq ($(UNAME_S),Linux)
 
 $(info Hello Linux)
-BUILD_DIR := ./build
+BUILD_DIR := ./$(BUILD_DIR_NAME)
 MKDIR_P := mkdir -p
 MKDIR_CMD := $(MKDIR_P) $(BUILD_DIR)
 RM_Q := rm -f
+EXEC_NAME = $(EXEC_NAME_PREFIX)
 SEP := /
 
 else
@@ -44,7 +49,7 @@ HEADER_FILES_TEMPLATE := $(wildcard *.hpp)
 
 OBJ_FILES := $(OBJ_FILES_C) $(OBJ_FILES_CPP)
 $(info $$OBJ_FILES is [$(OBJ_FILES)])
-EXEC_NAME = main
+
 
 .PHONY: dir
 
@@ -65,6 +70,4 @@ $(BUILD_DIR)$(SEP)%.o: %.c $(HEADER_FILES) $(HEADER_FILES_TEMPLATE)
 	$(CC) $(CFLAGS) -c -o $@ $<
 
 clean:
-	$(RM_Q) $(BUILD_DIR)$(SEP)*.o
-	$(RM_Q) $(BUILD_DIR)$(SEP)*.oxx
-	$(RM_Q) $(BUILD_DIR)$(SEP)$(EXEC_NAME)
+	$(RM_Q) $(BUILD_DIR)$(SEP)*
