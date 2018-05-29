@@ -49,10 +49,8 @@ void Class::fillAvgScoreVector(std::vector<double> &res){
   // This function needs to be re-written!
   // Don't use fillScoreVector to get the size
   res.clear();
-  *(m_students.front())->fillScoreVector(res);
-  for(int i = 0; i < res.size(); ++i){
-    res[i] = 0;
-  }
+  res.resize(Student::s_numSubject, 0.0);
+  
   std::vector<double> score;
   for(auto it = m_students.begin(); it != m_students.end(); ++it){
     (*it)->fillScoreVector(score);

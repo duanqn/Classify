@@ -4,7 +4,7 @@
 
 int Student::serial = 0;
 
-Student::Student(int subject): m_numSubject(subject){
+Student::Student(){
   m_class = nullptr;
   m_serial = Student::serial++; // This is not multithread-safe
 }
@@ -14,7 +14,7 @@ Student::~Student(){
 
 void Student::fillScoreVector(std::vector<double> &res){
   res.clear();
-  for(int i = 0; i < m_numSubject; ++i){
+  for(int i = 0; i < s_numSubject; ++i){
     res.push_back(m_score[i]);
   }
 }
@@ -32,7 +32,7 @@ std::istream & operator >>(std::istream &is, Student &s){
   
   s.m_score.clear();
   double tmpscore;
-  for(int i = 0; i < s.m_numSubject; ++i){
+  for(int i = 0; i < s.s_numSubject; ++i){
     is >> tmpscore;
     s.m_score.push_back(tmpscore);
   }

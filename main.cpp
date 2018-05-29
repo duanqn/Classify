@@ -9,6 +9,8 @@
 
 #define DEBUG 1
 
+int Student::s_numSubject = 3;
+
 int main(){
   #ifdef DEBUG
   std::string filename;
@@ -25,9 +27,10 @@ int main(){
   Solution *res = new Solution;
   res->init(numClasses);
   
+  Student::s_numSubject = numSubjects;
   Student *s;
   for(int i = 0; i < numStudents; ++i){
-    s = new Student(numSubjects);
+    s = new Student();
     datafile >> *s;
     res->addStudentAndSetClass(s);
     //std::cout << *s;

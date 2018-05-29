@@ -7,14 +7,14 @@ class Class;
 class Student{
   public:
   enum Gender {Male, Female};
+
+  static int s_numSubject;
   
   protected:
   
   static int serial;
   int m_serial;
   
-  int m_numSubject;
-
   //  学生信息：
   //  姓名、性别、成绩
   std::string m_name;
@@ -28,7 +28,7 @@ class Student{
   Student(const Student &);
   Student& operator = (const Student &);
   public:
-  Student(int subject);
+  Student();
   ~Student();
   double getScore(int subject){
     return m_score[subject];

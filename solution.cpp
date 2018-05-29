@@ -1,6 +1,5 @@
 #include "solution.h"
 #include <iostream>
-#include <windows.h>  // for HRESULT
 Solution::Solution(){
   nextAppendPos = 0;
 }
@@ -18,14 +17,14 @@ Class * Solution::accessClass(int i){
     return vClass[i];
   }
   else{
-    throw E_INVALIDARG;
+    throw duanqn::E_INVALIDARG;
   }
   return nullptr;
 }
 
 void Solution::init(int numClass){
   if(numClass <= 0){
-    throw E_INVALIDARG;
+    throw duanqn::E_INVALIDARG;
   }
   for(int i = 0; i < numClass; ++i){
     vClass.push_back(new Class);  // may throw exception if 'new' fails
@@ -34,7 +33,7 @@ void Solution::init(int numClass){
 
 void Solution::addStudentAndSetClass(Student *s){
   if(s == nullptr){
-    throw E_INVALIDARG;
+    throw duanqn::E_INVALIDARG;
   }
   vClass[nextAppendPos]->appendAndSetClass(s);
   ++nextAppendPos;
@@ -58,7 +57,7 @@ void Solution::applyRandomMove(){
     try{
       s1 = vClass[c1]->popRandomFreeElement();
     }
-    catch(HRESULT &code){
+    catch(duanqn::ERRCODE &code){
       successful = false;
       continue;
     }
@@ -66,7 +65,7 @@ void Solution::applyRandomMove(){
     try{
       s2 = vClass[c2]->popRandomFreeElement();
     }
-    catch(HRESULT &code){
+    catch(duanqn::ERRCODE &code){
       vClass[c1]->appendAndSetClass(s1);  // undo pop
       successful = false;
       continue;

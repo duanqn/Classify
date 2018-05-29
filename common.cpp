@@ -69,4 +69,7 @@ std::string toGB2312String(const std::wstring& str)
 {
 	return toGB2312String(str.c_str(), (int)str.size());
 }
+
+#else
+  #error OS not supported
 #endif
