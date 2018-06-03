@@ -31,7 +31,7 @@ Student * Class::popRandomFreeElement(){
     throw duanqn::E_FAIL; // all elements are pinned
   }
   found = false;
-  while(!found){
+  while(!found){  // Inefficient when most students are pinned
     r = rand() % m_students.size();
     it = m_students.begin();
     for(int i = 0; i < r; ++i){
