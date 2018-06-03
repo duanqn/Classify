@@ -23,5 +23,7 @@ class SAtarget {
   virtual double evalEntropy() = 0;
 
   virtual void applyRandomMove() = 0;
+
+  virtual void undoLastMove() = 0;
 };
 #endif // SATARGET_H_
