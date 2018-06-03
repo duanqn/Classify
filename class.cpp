@@ -1,4 +1,5 @@
 #include "class.h"
+#include <cstdlib>
 
 Class::Class(){
 }
@@ -50,7 +51,10 @@ void Class::fillAvgScoreVector(std::vector<double> &res){
   // Don't use fillScoreVector to get the size
   res.clear();
   res.resize(Student::s_numSubject, 0.0);
+<<<<<<< HEAD
   
+=======
+>>>>>>> Fix compile-related issues
   std::vector<double> score;
   for(auto it = m_students.begin(); it != m_students.end(); ++it){
     (*it)->fillScoreVector(score);

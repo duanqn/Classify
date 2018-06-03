@@ -3,6 +3,7 @@
 #include <cassert>
 
 int Student::serial = 0;
+int Student::s_numSubject = 3;
 
 Student::Student(){
   m_class = nullptr;

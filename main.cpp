@@ -6,10 +6,13 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <ctime>
+#include <cstdlib>
 
 //#define DEBUG 1
 
 int Student::s_numSubject = 3;
+
 
 int main(){
   #ifdef DEBUG
@@ -29,6 +32,7 @@ int main(){
   
   Student::s_numSubject = numSubjects;
   Student *s;
+  Student::s_numSubject = numSubjects;
   for(int i = 0; i < numStudents; ++i){
     s = new Student();
     datafile >> *s;

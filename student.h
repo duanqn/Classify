@@ -7,7 +7,10 @@ class Class;
 class Student{
   public:
   enum Gender {Male, Female};
+<<<<<<< HEAD
 
+=======
+>>>>>>> Fix compile-related issues
   static int s_numSubject;
   
   protected:
