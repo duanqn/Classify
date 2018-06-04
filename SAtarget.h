@@ -6,6 +6,7 @@ class SAtarget {
   double m_initTemp;
   double m_alpha; // 0 < alpha < 1 drop temperature
   double m_stopTemp;
+  int m_MarkovLen;
 
   // Latent variables
   double func;
@@ -14,7 +15,7 @@ class SAtarget {
 
   public:
   // Supply hyperparameters
-  SAtarget(double initTemp, double alpha, double stopTemp);
+  SAtarget(double initTemp, double alpha, double stopTemp, int Markov);
 
   virtual ~SAtarget();
 

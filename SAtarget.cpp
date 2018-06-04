@@ -6,8 +6,8 @@
 #include <cstdio>
 #endif
 
-SAtarget::SAtarget(double initTemp, double alpha, double stopTemp):
-  m_initTemp(initTemp), m_alpha(alpha), m_stopTemp(stopTemp){
+SAtarget::SAtarget(double initTemp, double alpha, double stopTemp, int Markov):
+  m_initTemp(initTemp), m_alpha(alpha), m_stopTemp(stopTemp), m_MarkovLen(Markov){
   func = 0;
   temp = initTemp;
   steps = 0;
@@ -27,7 +27,7 @@ void SAtarget::run(){
     #endif
     double newfunc;
     bool accept = false;
-    for(int i = 0; i < 500; ++i){
+    for(int i = 0; i < m_MarkovLen; ++i){
       applyRandomMove();
       newfunc = evalEntropy();
       if(newfunc < func){

@@ -20,7 +20,7 @@ class Solution: public SAtarget{
   Class *lastmove_class_2;
   
   public:
-  Solution(double initTemp, double alpha, double stopTemp);
+  Solution(double initTemp, double alpha, double stopTemp, int Markov);
   ~Solution();
   
   //  May throw exception

@@ -68,7 +68,7 @@ int main(){
   datafile >> numStudents >> numClasses >> numSubjects;
   std::cout << numStudents << " " << numClasses << std::endl;
   
-  Solution *res = new Solution(500, 0.93, 1);
+  Solution *res = new Solution(500, 0.93, 0.1, 10*numStudents);
   res->init(numClasses);
   
   Student::s_numSubject = numSubjects;
