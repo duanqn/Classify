@@ -15,8 +15,12 @@ class Class{
   ~Class();
 
   // Return the number of male/female students in this class
-  inline int countMale();
-  inline int countFemale();
+  inline int countMale(){
+    return nMale;
+  }
+  inline int countFemale(){
+    return nFemale;
+  }
 
   void appendAndSetClass(Student *t);
   
