@@ -51,8 +51,9 @@ int main(){
   outfile << *res;
   outfile.close();
   
-  srand((unsigned int)time(NULL));
   #else
+  srand((unsigned int)time(nullptr));
+
   // read in student data
   // run SA
   // print results
@@ -79,6 +80,16 @@ int main(){
     //std::cout << *s;
   }
   datafile.close();
+
+  res->run();
+
+  std::cout << setlocale(LC_ALL, NULL) << std::endl;
+  std::cout.imbue(std::locale());
+  std::cout << u8"测试" << std::endl;
+  std::ofstream outfile;
+  outfile.open("output.txt", std::ios::out);
+  outfile << *res;
+  outfile.close();
   #endif
   return 0;
 }
