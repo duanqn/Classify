@@ -65,6 +65,10 @@ void Class::fillAvgScoreVector(std::vector<double> &res){
   }
 }
 
+void Class::removeStudent(Student *t){
+  m_students.remove(t);
+}
+
 std::ostream & operator << (std::ostream & os, const Class &c){
   for(auto it = c.m_students.begin(); it != c.m_students.end(); ++it){
     os << **it;

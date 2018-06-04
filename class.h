@@ -14,6 +14,8 @@ class Class{
   
   Student * popRandomFreeElement();
 
+  void removeStudent(Student *t);
+
   void fillAvgScoreVector(std::vector<double> &res);
   
   //friend std::wostream & operator << (std::wostream & wos, const Class &c);
