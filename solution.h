@@ -3,7 +3,8 @@
 #include <vector>
 #include "common.h"
 #include "class.h"
-class Solution{
+#include "SAtarget.h"
+class Solution: public SAtarget{
   private:
   std::vector<Class *> vClass;
   int nextAppendPos;
@@ -12,6 +13,11 @@ class Solution{
   std::vector<double> m_weightMaleAvg;
   std::vector<double> m_weightFemaleAvg;
   std::vector<double> m_weightTotalAvg;
+
+  Student *lastmove_1;
+  Class *lastmove_class_1;
+  Student *lastmove_2;
+  Class *lastmove_class_2;
   
   public:
   Solution();
@@ -29,12 +35,6 @@ class Solution{
   void output(FILE *f);
   
   void addStudentAndSetClass(Student *s);
-  
-  void applyRandomMove();
-
-  // evaluates the entropy of the solution
-  // called by the SA algorithms
-  double evalEntropy();
   
   //friend std::wostream & operator << (std::wostream &os, const Solution &s);
   friend std::ostream & operator << (std::ostream &os, const Solution &s);

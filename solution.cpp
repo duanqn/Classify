@@ -2,6 +2,8 @@
 #include <iostream>
 Solution::Solution(){
   nextAppendPos = 0;
+  lastmove_1 = lastmove_2 = nullptr;
+  lastmove_class_1 = lastmove_class_2 = nullptr;
 }
 
 Solution::~Solution(){
@@ -74,6 +76,11 @@ void Solution::applyRandomMove(){
     vClass[c1]->appendAndSetClass(s2);
     vClass[c2]->appendAndSetClass(s1);  // exchange
   }while(!successful);  // TODO: abort after n failures
+
+  lastmove_1 = s1;
+  lastmove_class_1 = vClass[c2];
+  lastmove_2 = s2;
+  lastmove_class_2 = vClass[c1];
 }
 
 double Solution::evalEntropy(){
@@ -86,6 +93,20 @@ double Solution::evalEntropy(){
   double s2MNum = 0, s2FNum = 0;
   double avgMNum = 0, avgFNum = 0;
   
+  std::vector<std::vector<double> > avg;
+  avg.resize(vClass.size());
+  for(int i = 0; i < vClass.size(); ++i){
+    vClass[i]->fillAvgScoreVector(avg[i]);
+  }
+
+  
+}
+
+void Solution::undoLastMove(){
+  lastmove_class_1->removeStudent(lastmove_1);
+  lastmove_class_2->removeStudent(lastmove_2);
+  lastmove_class_1->appendAndSetClass(lastmove_2);
+  lastmove_class_2->appendAndSetClass(lastmove_1);
 }
 
 void Solution::output(FILE *f){
