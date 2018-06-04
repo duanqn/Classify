@@ -38,6 +38,10 @@ class Solution: public SAtarget{
 
   void randomShuffle();
 
+  inline double getEntropy(){
+    return func;
+  }
+
   // inherited
   virtual double evalEntropy();
   virtual void applyRandomMove();

@@ -88,8 +88,14 @@ int main(){
   }
   datafile.close();
 
+  double minEntropy = 2147483647;
+  int minpos = 0;
   for(int j = 0; j < n_instance; ++j){
     array[j]->run();
+    if(array[j]->getEntropy() < minEntropy){
+      minEntropy = array[j]->getEntropy();
+      minpos = j;
+    }
   }
 
   std::cout << setlocale(LC_ALL, NULL) << std::endl;
@@ -97,7 +103,7 @@ int main(){
   std::cout << u8"测试" << std::endl;
   std::ofstream outfile;
   outfile.open("output.txt", std::ios::out);
-  outfile << *array[0];
+  outfile << *array[minpos];
   outfile.close();
 
   for(int i = 0; i < n_instance; ++i){

@@ -1,5 +1,8 @@
 #include "solution.h"
 #include <iostream>
+
+#define DEBUG
+
 Solution::Solution(double initTemp, double alpha, double stopTemp, int Markov): SAtarget(initTemp, alpha, stopTemp, Markov){
   nextAppendPos = 0;
   lastmove_1 = lastmove_2 = nullptr;
@@ -181,5 +184,12 @@ std::ostream & operator << (std::ostream &os, const Solution &s){
     os << *(s.vClass[i]);
   }
   os << u8"<<<<<方案结束<<<<<" << std::endl;
+  #ifdef DEBUG
+  os << u8"熵： " << s.func << std::endl;
+  #endif
   return os;
 }
+
+#ifdef DEBUG
+#undef DEBUG
+#endif
