@@ -3,7 +3,7 @@ EXEC_NAME_PREFIX = classify
 
 CC = g++
 LD = g++
-CFLAGS = -std=c++11 -O2
+CFLAGS = -std=c++14 -O2
 LDFLAGS = 
 
 $(info Building initiated...)
