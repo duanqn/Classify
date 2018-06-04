@@ -22,7 +22,7 @@ class Solution: public SAtarget{
   public:
   Solution(double initTemp, double alpha, double stopTemp, int Markov);
   ~Solution();
-  
+
   //  May throw exception
   //  E_INDEXOVERFLOW
   //  E_INVALIDARG
@@ -35,6 +35,8 @@ class Solution: public SAtarget{
   void output(FILE *f);
   
   void addStudentAndSetClass(Student *s);
+
+  void randomShuffle();
 
   // inherited
   virtual double evalEntropy();

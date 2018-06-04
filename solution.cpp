@@ -149,6 +149,15 @@ void Solution::undoLastMove(){
   lastmove_class_2->appendAndSetClass(lastmove_1);
 }
 
+void Solution::randomShuffle(){
+  if(vClass.size() > 0){
+    int studentnum = vClass[0]->countMale() + vClass[0]->countFemale();
+    for(int i = 0; i < studentnum * vClass.size() / 2.0; ++i){
+      applyRandomMove();
+    }
+  }
+}
+
 void Solution::output(FILE *f){
   // TODO
 }
