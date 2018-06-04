@@ -7,6 +7,9 @@
 class Class{
   private:
   std::list<Student *> m_students;
+  int nMale;
+  int nFemale;
+  
   public:
   Class();
   ~Class();

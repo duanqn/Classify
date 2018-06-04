@@ -2,6 +2,7 @@
 #include <cstdlib>
 
 Class::Class(){
+  nMale = nFemale = 0;
 }
 
 Class::~Class(){
@@ -9,9 +10,11 @@ Class::~Class(){
 
 void Class::appendAndSetClass(Student *t){
   if(t->isMale()){
+    ++nMale;
     m_students.push_front(t);
   }
   else{
+    ++nFemale;
     m_students.push_back(t);
   }
   t->setClass(this);
@@ -41,7 +44,14 @@ Student * Class::popRandomFreeElement(){
       found = true;
     }
   }
+
   Student *res = *it;
+  if(res->isMale()){
+    --nMale;
+  }
+  else{
+    --nFemale;
+  }
   it = m_students.erase(it);
   return res;
 }
@@ -66,6 +76,12 @@ void Class::fillAvgScoreVector(std::vector<double> &res){
 }
 
 void Class::removeStudent(Student *t){
+  if(t->isMale()){
+    --nMale;
+  }
+  else{
+    --nFemale;
+  }
   m_students.remove(t);
 }
 
