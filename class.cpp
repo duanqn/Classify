@@ -20,6 +20,14 @@ void Class::appendAndSetClass(Student *t){
   t->setClass(this);
 }
 
+int Class::countMale(){
+  return nMale;
+}
+
+int Class::countFemale(){
+  return nFemale;
+}
+
 Student * Class::popRandomFreeElement(){
   int r;
   auto it = m_students.begin();

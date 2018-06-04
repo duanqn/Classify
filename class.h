@@ -9,10 +9,15 @@ class Class{
   std::list<Student *> m_students;
   int nMale;
   int nFemale;
-  
+
   public:
   Class();
   ~Class();
+
+  // Return the number of male/female students in this class
+  inline int countMale();
+  inline int countFemale();
+
   void appendAndSetClass(Student *t);
   
   Student * popRandomFreeElement();
