@@ -20,7 +20,7 @@ class Solution: public SAtarget{
   Class *lastmove_class_2;
   
   public:
-  Solution();
+  Solution(double initTemp, double alpha, double stopTemp);
   ~Solution();
   
   //  May throw exception
@@ -35,6 +35,11 @@ class Solution: public SAtarget{
   void output(FILE *f);
   
   void addStudentAndSetClass(Student *s);
+
+  // inherited
+  virtual double evalEntropy();
+  virtual void applyRandomMove();
+  virtual void undoLastMove();
   
   //friend std::wostream & operator << (std::wostream &os, const Solution &s);
   friend std::ostream & operator << (std::ostream &os, const Solution &s);

@@ -1,4 +1,6 @@
 #include "SAtarget.h"
+#include <cstdlib>
+#include <cmath>
 #ifdef DEBUG
 #include <cstdio>
 #endif

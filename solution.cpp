@@ -1,6 +1,6 @@
 #include "solution.h"
 #include <iostream>
-Solution::Solution(){
+Solution::Solution(double initTemp, double alpha, double stopTemp): SAtarget(initTemp, alpha, stopTemp){
   nextAppendPos = 0;
   lastmove_1 = lastmove_2 = nullptr;
   lastmove_class_1 = lastmove_class_2 = nullptr;
