@@ -1,6 +1,7 @@
 #include "SAtarget.h"
 #include <cstdlib>
 #include <cmath>
+#define DEBUG
 #ifdef DEBUG
 #include <cstdio>
 #endif
@@ -57,3 +58,7 @@ void SAtarget::run(){
     temp *= m_alpha;
   }
 }
+
+#ifdef DEBUG
+#undef DEBUG
+#endif
