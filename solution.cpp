@@ -92,6 +92,26 @@ double Solution::evalEntropy(){
   double entropy = 0;
   double s2MNum = 0, s2FNum = 0;
   double avgMNum = 0, avgFNum = 0;
+  std::vector<double> avgScore;
+  std::vector<double> s2Score;
+  double res;
+
+  for(int i = 0; i < vClass.size(); ++i){
+    avgMNum += vClass[i]->countMale();
+    avgFNum += vClass[i]->countFemale();
+  }
+  avgMNum /= vClass.size();
+  avgFNum /= vClass.size();
+
+  for(int i = 0; i < vClass.size(); ++i){
+    s2MNum += (vClass[i]->countMale() - avgMNum) * (vClass[i]->countMale() - avgMNum);
+    s2FNum += (vClass[i]->countFemale() - avgFNum) * (vClass[i]->countFemale() - avgFNum);
+  }
+  s2MNum /= vClass.size();
+  s2FNum /= vClass.size();
+
+  avgScore.resize(Student::s_numSubject, 0);
+  s2Score.resize(Student::s_numSubject, 0);
   
   std::vector<std::vector<double> > avg;
   avg.resize(vClass.size());
@@ -99,7 +119,27 @@ double Solution::evalEntropy(){
     vClass[i]->fillAvgScoreVector(avg[i]);
   }
 
-  
+  for(int subject = 0; subject < Student::s_numSubject; ++subject){
+    for(int i = 0; i < vClass.size(); ++i){
+      avgScore[subject] += avg[i][subject];
+    }
+    avgScore[subject] /= vClass.size();
+  }
+
+  for(int subject = 0; subject < Student::s_numSubject; ++subject){
+    for(int i = 0; i < vClass.size(); ++i){
+      s2Score[subject] += (avg[i][subject] - avgScore[subject]) * (avg[i][subject] - avgScore[subject]);
+    }
+    s2Score[subject] /= vClass.size();
+  }
+
+  // Compute res based on weights
+  res += s2MNum * 5 + s2FNum * 5;
+  for(int subject = 0; subject < Student::s_numSubject; ++subject){
+    res += s2Score[subject];
+  }
+
+  return res;
 }
 
 void Solution::undoLastMove(){
