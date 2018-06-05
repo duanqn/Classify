@@ -13,6 +13,8 @@ class SAtarget {
   double temp;
   int steps;
 
+  bool accept(double oldval, double newval, double temperature);
+
   public:
   // Supply hyperparameters
   SAtarget(double initTemp, double alpha, double stopTemp, int Markov);

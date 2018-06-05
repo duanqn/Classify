@@ -15,6 +15,16 @@ SAtarget::SAtarget(double initTemp, double alpha, double stopTemp, int Markov):
 
 SAtarget::~SAtarget(){}
 
+bool SAtarget::accept(double oldval, double newval, double temperature){
+  double randval = rand() / (double)RAND_MAX;
+  if(newval < oldval){
+    return true;
+  }
+  else{
+    return randval < exp((oldval - newval) / temperature);
+  }
+}
+
 void SAtarget::run(){
   while(true){
     if(temp <= m_stopTemp){
@@ -30,27 +40,17 @@ void SAtarget::run(){
     for(int i = 0; i < m_MarkovLen; ++i){
       applyRandomMove();
       newfunc = evalEntropy();
-      if(newfunc < func){
-        // always accept
+      if(SAtarget::accept(func, newfunc, temp)){
         func = newfunc;
         #ifdef DEBUG
-        fprintf(stderr, "F = %lf\n", func);
+        fprintf(stderr, "F => %lf\n", func);
         #endif
       }
       else{
-        accept = (((double) rand() / (RAND_MAX)) < exp((func - newfunc) / temp));
-        if(accept){
-          func = newfunc;
-          #ifdef DEBUG
-          fprintf(stderr, "F = %lf, *accepted\n", func);
-          #endif
-        }
-        else{
-          undoLastMove();
-          #ifdef DEBUG
-          fprintf(stderr, "F = %lf, *rejected\n", newfunc);
-          #endif
-        }
+        undoLastMove();
+        #ifdef DEBUG
+        fprintf(stderr, "F = %lf, *rejected\n", newfunc);
+        #endif
       }
     }
 
