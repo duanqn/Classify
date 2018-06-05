@@ -118,9 +118,6 @@ int main(){
   }
   #endif
 
-  std::cout << setlocale(LC_ALL, NULL) << std::endl;
-  std::cout.imbue(std::locale());
-  std::cout << u8"测试" << std::endl;
   std::ofstream outfile;
   outfile.open("output.txt", std::ios::out);
   outfile << *array[minpos];
