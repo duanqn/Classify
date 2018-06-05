@@ -16,7 +16,7 @@ MKDIR_P := md
 MKDIR_CMD := if not exist $(BUILD_DIR) $(MKDIR_P) $(BUILD_DIR)
 RM_Q := del /q
 EXEC_NAME = $(EXEC_NAME_PREFIX).exe
-FixPath = $(subst /,\,$1)
+FixPath = $(subst /,\\,$1)
 SEP = $(call FixPath,/)
 else
 
