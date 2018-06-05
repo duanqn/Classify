@@ -1,7 +1,7 @@
 #include "SAtarget.h"
 #include <cstdlib>
 #include <cmath>
-#define DEBUG
+//#define DEBUG
 #ifdef DEBUG
 #include <cstdio>
 #endif
