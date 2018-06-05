@@ -126,6 +126,7 @@ int main(){
   outfile << *array[minpos];
   outfile.close();
 
+  array[0]->deleteAllStudents();  // Only delete once!
   for(int i = 0; i < n_instance; ++i){
     delete array[i];
   }
