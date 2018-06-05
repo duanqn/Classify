@@ -182,6 +182,12 @@ void Solution::run(){
   SAtarget::run();
 }
 
+void Solution::deleteAllStudents(){
+  for(int i = 0; i < vClass.size(); ++i){
+    vClass[i]->deleteAllMembers();
+  }
+}
+
 void Solution::randomShuffle(){
   if(vClass.size() > 0){
     int studentnum = vClass[0]->countMale() + vClass[0]->countFemale();

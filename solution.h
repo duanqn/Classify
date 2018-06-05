@@ -38,6 +38,8 @@ class Solution: public SAtarget{
   
   void addStudentAndSetClass(Student *s);
 
+  void deleteAllStudents();
+
   void randomShuffle();
 
   inline double getEntropy(){
