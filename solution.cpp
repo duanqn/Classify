@@ -185,7 +185,7 @@ void Solution::run(){
 void Solution::randomShuffle(){
   if(vClass.size() > 0){
     int studentnum = vClass[0]->countMale() + vClass[0]->countFemale();
-    for(int i = 0; i < studentnum * vClass.size() / 2.0; ++i){
+    for(int i = 0; i < studentnum * vClass.size() * studentnum * vClass.size() / 2.0; ++i){
       applyRandomMove();
     }
   }
