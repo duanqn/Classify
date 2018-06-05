@@ -3,6 +3,9 @@
 #include <cstdlib>
 
 #define DEBUG
+#ifdef DEBUG
+#include <cstdio>
+#endif
 
 Solution::Solution(double initTemp, double alpha, double stopTemp, int Markov): SAtarget(initTemp, alpha, stopTemp, Markov){
   nextAppendPos = 0;
@@ -173,6 +176,9 @@ void Solution::run(){
   while(testAcceptance() < 0.9){
     m_initTemp *= 1.1;
   }
+  #ifdef DEBUG
+  printf("Init temp: %lf\n", m_initTemp);
+  #endif
   SAtarget::run();
 }
 
