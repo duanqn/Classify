@@ -76,7 +76,6 @@ int main(){
   for(int i = 0; i < n_instance; ++i){
     array[i] = new Solution(500, 0.93, 0.01, numStudents*numStudents / 3);
     array[i]->init(numClasses);
-    array[i]->randomShuffle();
   }
   
   Student::s_numSubject = numSubjects;
@@ -96,23 +95,25 @@ int main(){
 
   #ifdef MULTI
   std::thread *pool[n_instance];
-  for(int j = 0; j < n_instance; ++j){
-    pool[j] = new std::thread(&Solution::run, array[j]);
+  for(int i = 0; i < n_instance; ++i){
+    array[i]->randomShuffle();
+    pool[i] = new std::thread(&Solution::run, array[i]);
   }
-  for(int j = 0; j < n_instance; ++j){
-    pool[j]->join();
-    delete pool[j];
-    if(array[j]->getEntropy() < minEntropy){
-      minEntropy = array[j]->getEntropy();
-      minpos = j;
+  for(int i = 0; i < n_instance; ++i){
+    pool[i]->join();
+    delete pool[i];
+    if(array[i]->getEntropy() < minEntropy){
+      minEntropy = array[i]->getEntropy();
+      minpos = i;
     }
   }
   #else
-  for(int j = 0; j < n_instance; ++j){
-    array[j]->run();
-    if(array[j]->getEntropy() < minEntropy){
-      minEntropy = array[j]->getEntropy();
-      minpos = j;
+  for(int i = 0; i < n_instance; ++i){
+    array[i]->randomShuffle();
+    array[i]->run();
+    if(array[i]->getEntropy() < minEntropy){
+      minEntropy = array[i]->getEntropy();
+      minpos = i;
     }
   }
   #endif
