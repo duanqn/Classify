@@ -8,6 +8,9 @@
 #include <string>
 #include <ctime>
 #include <cstdlib>
+#ifdef MULTI
+#include <thread>
+#endif
 
 //#define DEBUG 1
 const int n_instance = 10;
@@ -90,6 +93,21 @@ int main(){
 
   double minEntropy = 2147483647;
   int minpos = 0;
+
+  #ifdef MULTI
+  std::thread *pool[n_instance];
+  for(int j = 0; j < n_instance; ++j){
+    pool[j] = new std::thread(&Solution::run, array[j]);
+  }
+  for(int j = 0; j < n_instance; ++j){
+    pool[j]->join();
+    delete pool[j];
+    if(array[j]->getEntropy() < minEntropy){
+      minEntropy = array[j]->getEntropy();
+      minpos = j;
+    }
+  }
+  #else
   for(int j = 0; j < n_instance; ++j){
     array[j]->run();
     if(array[j]->getEntropy() < minEntropy){
@@ -97,6 +115,7 @@ int main(){
       minpos = j;
     }
   }
+  #endif
 
   std::cout << setlocale(LC_ALL, NULL) << std::endl;
   std::cout.imbue(std::locale());
