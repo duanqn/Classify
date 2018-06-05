@@ -22,6 +22,8 @@ class Class{
     return nFemale;
   }
 
+  void deleteAllMembers();
+
   void appendAndSetClass(Student *t);
   
   Student * popRandomFreeElement();

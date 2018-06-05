@@ -8,6 +8,12 @@ Class::Class(){
 Class::~Class(){
 }
 
+void Class::deleteAllMembers(){
+  for(auto it = m_students.begin(); it != m_students.end(); ++it){
+    delete *it;
+  }
+}
+
 void Class::appendAndSetClass(Student *t){
   if(t->isMale()){
     ++nMale;
