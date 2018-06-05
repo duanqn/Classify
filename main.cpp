@@ -71,7 +71,7 @@ int main(){
   
   Solution **array = new Solution* [n_instance];
   for(int i = 0; i < n_instance; ++i){
-    array[i] = new Solution(500, 0.93, 0.1, 10*numStudents);
+    array[i] = new Solution(500, 0.93, 0.01, numStudents*numStudents / 3);
     array[i]->init(numClasses);
     array[i]->randomShuffle();
   }
