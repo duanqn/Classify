@@ -18,6 +18,8 @@ class Solution: public SAtarget{
   Class *lastmove_class_1;
   Student *lastmove_2;
   Class *lastmove_class_2;
+
+  double testAcceptance();
   
   public:
   Solution(double initTemp, double alpha, double stopTemp, int Markov);
@@ -46,6 +48,7 @@ class Solution: public SAtarget{
   virtual double evalEntropy();
   virtual void applyRandomMove();
   virtual void undoLastMove();
+  virtual void run();
   
   //friend std::wostream & operator << (std::wostream &os, const Solution &s);
   friend std::ostream & operator << (std::ostream &os, const Solution &s);

@@ -1,5 +1,6 @@
 #include "solution.h"
 #include <iostream>
+#include <cstdlib>
 
 #define DEBUG
 
@@ -150,6 +151,29 @@ void Solution::undoLastMove(){
   lastmove_class_2->removeStudent(lastmove_2);
   lastmove_class_1->appendAndSetClass(lastmove_2);
   lastmove_class_2->appendAndSetClass(lastmove_1);
+}
+
+double Solution::testAcceptance(){
+  int number = 1000;
+  double func_1 = evalEntropy();
+  double func_2 = 0;
+  int count = 0;
+  for(int i = 0; i < number; ++i){
+    applyRandomMove();
+    func_2 = evalEntropy();
+    if(accept(func_1, func_2, m_initTemp)){
+      ++count;
+    }
+    undoLastMove();
+  }
+  return count / (double)number;
+}
+
+void Solution::run(){
+  while(testAcceptance() < 0.9){
+    m_initTemp *= 1.1;
+  }
+  SAtarget::run();
 }
 
 void Solution::randomShuffle(){
