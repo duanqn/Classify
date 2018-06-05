@@ -3,8 +3,8 @@ EXEC_NAME_PREFIX = classify
 
 CC = g++
 LD = g++
-CFLAGS = -std=c++14 -O2
-LDFLAGS = 
+CFLAGS = -std=c++14 -O2 -DMULTI -pthread
+LDFLAGS = -lpthread
 
 $(info Building initiated...)
 
@@ -61,7 +61,7 @@ $(BUILD_DIR):
 	$(MKDIR_CMD)
 
 $(BUILD_DIR)$(SEP)$(EXEC_NAME): $(OBJ_FILES)
-	$(LD) $(LDFLAGS) -o $@ $^
+	$(LD) -o $@ $^ $(LDFLAGS)
 
 $(BUILD_DIR)$(SEP)%.oxx: %.cpp $(HEADER_FILES) $(HEADER_FILES_TEMPLATE)
 	$(CC) $(CFLAGS) -c -o $@ $<
