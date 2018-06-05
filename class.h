@@ -30,7 +30,7 @@ class Class{
 
   void removeStudent(Student *t);
 
-  void fillAvgScoreVector(std::vector<double> &res);
+  void fillAvgScoreVector(std::vector<double> &res) const ;
   
   //friend std::wostream & operator << (std::wostream & wos, const Class &c);
   friend std::ostream & operator << (std::ostream & os, const Class &c);

@@ -1,5 +1,6 @@
 #include "class.h"
 #include <cstdlib>
+#include <iostream>
 
 Class::Class(){
   nMale = nFemale = 0;
@@ -62,7 +63,7 @@ Student * Class::popRandomFreeElement(){
   return res;
 }
 
-void Class::fillAvgScoreVector(std::vector<double> &res){
+void Class::fillAvgScoreVector(std::vector<double> &res) const {
   // This function needs to be re-written!
   // Don't use fillScoreVector to get the size
   res.clear();
@@ -92,6 +93,21 @@ void Class::removeStudent(Student *t){
 }
 
 std::ostream & operator << (std::ostream & os, const Class &c){
+  if(rand() / (double)RAND_MAX < 0.5){
+    os << u8"男生 " << c.nMale << u8" 人" << std::endl;
+    os << u8"女生 " << c.nFemale << u8" 人" << std::endl;
+  }
+  else{
+    os << u8"女生 " << c.nFemale << u8" 人" << std::endl;
+    os << u8"男生 " << c.nMale << u8" 人" << std::endl;
+  }
+  os << u8"平均分： ";
+  std::vector<double> avgs;
+  c.fillAvgScoreVector(avgs);
+  for(int i = 0; i < avgs.size(); ++i){
+    os << avgs[i] << " ";
+  }
+  os << std::endl;
   for(auto it = c.m_students.begin(); it != c.m_students.end(); ++it){
     os << **it;
   }
