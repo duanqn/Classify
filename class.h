@@ -24,7 +24,7 @@ class Class{
 
   void deleteAllMembers();
 
-  void appendAndSetClass(Student *t);
+  void append(Student *t);
   
   Student * popRandomFreeElement();
 

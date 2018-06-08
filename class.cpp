@@ -15,7 +15,7 @@ void Class::deleteAllMembers(){
   }
 }
 
-void Class::appendAndSetClass(Student *t){
+void Class::append(Student *t){
   if(t->isMale()){
     ++nMale;
     m_students.push_front(t);
@@ -24,7 +24,6 @@ void Class::appendAndSetClass(Student *t){
     ++nFemale;
     m_students.push_back(t);
   }
-  t->setClass(this);
 }
 
 Student * Class::popRandomFreeElement(){

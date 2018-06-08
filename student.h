@@ -20,9 +20,6 @@ class Student{
   Gender m_gender;
   std::vector<double> m_score;
   
-  // assigned class
-  Class *m_class;
-  
   // ban copy-constructors
   Student(const Student &);
   Student& operator = (const Student &);
@@ -34,12 +31,6 @@ class Student{
   }
   void setScore(int subject, double val){
     m_score[subject] = val;
-  }
-  Class* getClass(){
-    return m_class;
-  }
-  void setClass(Class *val){
-    m_class = val;
   }
   bool isMale(){
     return m_gender == Male;

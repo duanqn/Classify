@@ -36,7 +36,7 @@ class Solution: public SAtarget{
   
   void output(FILE *f);
   
-  void addStudentAndSetClass(Student *s);
+  void addStudent(Student *s);
 
   void deleteAllStudents();
 

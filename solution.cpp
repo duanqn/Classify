@@ -40,11 +40,11 @@ void Solution::init(int numClass){
   }
 }
 
-void Solution::addStudentAndSetClass(Student *s){
+void Solution::addStudent(Student *s){
   if(s == nullptr){
     throw duanqn::E_INVALIDARG;
   }
-  vClass[nextAppendPos]->appendAndSetClass(s);
+  vClass[nextAppendPos]->append(s);
   ++nextAppendPos;
   if(nextAppendPos == vClass.size()){
     nextAppendPos = 0;
@@ -75,13 +75,13 @@ void Solution::applyRandomMove(){
       s2 = vClass[c2]->popRandomFreeElement();
     }
     catch(duanqn::ERRCODE &code){
-      vClass[c1]->appendAndSetClass(s1);  // undo pop
+      vClass[c1]->append(s1);  // undo pop
       successful = false;
       continue;
     }
     
-    vClass[c1]->appendAndSetClass(s2);
-    vClass[c2]->appendAndSetClass(s1);  // exchange
+    vClass[c1]->append(s2);
+    vClass[c2]->append(s1);  // exchange
   }while(!successful);  // TODO: abort after n failures
 
   lastmove_1 = s1;
@@ -152,8 +152,8 @@ double Solution::evalEntropy(){
 void Solution::undoLastMove(){
   lastmove_class_1->removeStudent(lastmove_1);
   lastmove_class_2->removeStudent(lastmove_2);
-  lastmove_class_1->appendAndSetClass(lastmove_2);
-  lastmove_class_2->appendAndSetClass(lastmove_1);
+  lastmove_class_1->append(lastmove_2);
+  lastmove_class_2->append(lastmove_1);
 }
 
 double Solution::testAcceptance(){

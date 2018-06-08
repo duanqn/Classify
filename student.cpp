@@ -5,7 +5,6 @@
 int Student::serial = 0;
 
 Student::Student(){
-  m_class = nullptr;
   m_serial = Student::serial++; // This is not multithread-safe
 }
 

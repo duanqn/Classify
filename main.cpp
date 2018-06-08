@@ -84,7 +84,7 @@ int main(){
     s = new Student();
     datafile >> *s;
     for(int j = 0; j < n_instance; ++j){
-      array[j]->addStudentAndSetClass(s);
+      array[j]->addStudent(s);
     }
     //std::cout << *s;
   }
