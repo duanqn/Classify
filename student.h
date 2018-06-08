@@ -26,13 +26,13 @@ class Student{
   public:
   Student();
   ~Student();
-  double getScore(int subject){
+  double getScore(int subject) const {
     return m_score[subject];
   }
   void setScore(int subject, double val){
     m_score[subject] = val;
   }
-  bool isMale(){
+  bool isMale() const {
     return m_gender == Male;
   }
 
