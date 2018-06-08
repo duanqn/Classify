@@ -47,7 +47,7 @@ class Student{
 
   void fillScoreVector(std::vector<double> &res);
   
-  virtual bool isPinned();
+  virtual bool isPinned() const;
   virtual bool pin(); // returns successful or not
   
   friend std::istream & operator >> (std::istream &is, Student &s);

@@ -73,7 +73,7 @@ std::ostream & operator << (std::ostream &os, Student &s){
   return os;
 }
 
-bool Student::isPinned(){
+bool Student::isPinned() const{
   return false;
 }
 
