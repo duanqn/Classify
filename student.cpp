@@ -56,17 +56,16 @@ std::wostream & operator << (std::wostream &wos, Student &s){
 }
 */
 
-std::ostream & operator << (std::ostream &os, Student &s){
-  //os << (s.m_name) << " ";
-  os << GB2312toUTF8(s.m_name) << " ";
-  if(s.m_gender == Student::Male){
+std::ostream & operator << (std::ostream &os, const Student &s){
+  os << GB2312toUTF8(s.getName()) << " ";
+  if(s.getGender() == Student::Male){
     os << "M ";
   }
   else{
     os << "F ";
   }
-  for(int i = 0; i < s.m_score.size(); ++i){
-    os << s.m_score[i] << " ";
+  for(int i = 0; i < Student::s_numSubject; ++i){
+    os << s.getScore(i) << " ";
   }
   os << std::endl;
   return os;

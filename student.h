@@ -36,12 +36,20 @@ class Student{
     return m_gender == Male;
   }
 
+  inline const Gender getGender() const {
+    return m_gender;
+  }
+
+  inline const std::string getName() const {
+    return m_name;
+  }
+
   void fillScoreVector(std::vector<double> &res);
   
   virtual bool isPinned() const;
   virtual bool pin(); // returns successful or not
   
   friend std::istream & operator >> (std::istream &is, Student &s);
-  friend std::ostream & operator << (std::ostream &os, Student &s);
+  friend std::ostream & operator << (std::ostream &os, const Student &s);
 };
 #endif
