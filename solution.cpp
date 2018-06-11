@@ -140,11 +140,32 @@ double Solution::evalEntropy(){
     s2Score[subject] /= vClass.size();
   }
 
+  // Avg on total
+  double avgTotal = 0;
+  double s2Total = 0;
+  double temp = 0;
+  for(int i = 0; i < vClass.size(); ++i){
+    for(int subject = 0; subject < Student::s_numSubject; ++subject){
+      avgTotal += avg[i][subject];
+    }
+  }
+  avgTotal /= vClass.size();
+
+  for(int i = 0; i < vClass.size(); ++i){
+    temp = 0;
+    for(int subject = 0; subject < Student::s_numSubject; ++subject){
+      temp += avg[i][subject];
+    }
+    s2Total += (temp - avgTotal) * (temp - avgTotal);
+  }
+  s2Total /= vClass.size();
+
   // Compute res based on weights
   res += s2MNum * 5 + s2FNum * 5;
   for(int subject = 0; subject < Student::s_numSubject; ++subject){
     res += s2Score[subject];
   }
+  res += s2Total;
 
   return res;
 }
