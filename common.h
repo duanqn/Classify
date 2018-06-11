@@ -18,6 +18,12 @@ namespace duanqn{
   
 }
 
+#define INIT_ACCEPTANCE 0.9
+#define GENDER_WEIGHT 5
+#define TOTAL_WEIGHT 1.0
+#define INIT_TEMP 1
+#define TEMP_DROP_RATE 0.97
+#define STOP_TEMP 0.001
 
 
 

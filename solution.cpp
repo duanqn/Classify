@@ -161,11 +161,11 @@ double Solution::evalEntropy(){
   s2Total /= vClass.size();
 
   // Compute res based on weights
-  res += s2MNum * 5 + s2FNum * 5;
+  res += (s2MNum + s2FNum) * GENDER_WEIGHT;
   for(int subject = 0; subject < Student::s_numSubject; ++subject){
     res += s2Score[subject];
   }
-  res += s2Total;
+  res += s2Total * TOTAL_WEIGHT;
 
   return res;
 }
@@ -194,7 +194,7 @@ double Solution::testAcceptance(){
 }
 
 void Solution::run(){
-  while(testAcceptance() < 0.9){
+  while(testAcceptance() < INIT_ACCEPTANCE){
     m_initTemp *= 1.1;
   }
   #ifdef DEBUG

@@ -74,7 +74,7 @@ int main(){
   
   Solution **array = new Solution* [n_instance];
   for(int i = 0; i < n_instance; ++i){
-    array[i] = new Solution(1, 0.97, 0.001, numStudents*numStudents / 3);
+    array[i] = new Solution(INIT_TEMP, TEMP_DROP_RATE, STOP_TEMP, numStudents*numStudents / 3);
     array[i]->init(numClasses);
   }
   
