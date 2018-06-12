@@ -13,7 +13,6 @@
 #endif
 
 //#define DEBUG 1
-const int n_instance = 10;
 
 int Student::s_numSubject = 3;
 

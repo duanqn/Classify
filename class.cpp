@@ -1,4 +1,4 @@
-#include "class.h"
+﻿#include "class.h"
 #include <cstdlib>
 #include <iostream>
 
