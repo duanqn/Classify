@@ -1,4 +1,4 @@
-#include "solution.h"
+﻿#include "solution.h"
 #include <iostream>
 #include <cstdlib>
 
@@ -101,7 +101,7 @@ double Solution::evalEntropy(){
   double avgMNum = 0, avgFNum = 0;
   std::vector<double> avgScore;
   std::vector<double> s2Score;
-  double res;
+  double res = 0;
 
   for(int i = 0; i < vClass.size(); ++i){
     avgMNum += vClass[i]->countMale();
