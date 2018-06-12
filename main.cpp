@@ -13,6 +13,9 @@
 #endif
 
 //#define DEBUG 1
+#ifdef time
+#include <ctime>
+#endif
 
 int Student::s_numSubject = 3;
 
@@ -91,6 +94,11 @@ int main(){
 
   double minEntropy = 2147483647;
   int minpos = 0;
+  
+  #ifdef TIME
+  clock_t t = clock();
+  printf("Timing...\n");
+  #endif  // TIME
 
   #ifdef MULTI
   std::thread *pool[n_instance];
@@ -115,7 +123,12 @@ int main(){
       minpos = i;
     }
   }
-  #endif
+  #endif  // MULTI
+
+  #ifdef TIME
+  t = clock() - t;
+  printf("Running time: %lf seconds\n", ((double)t)/CLOCKS_PER_SEC);
+  #endif  // TIME
 
   std::ofstream outfile;
   outfile.open("output.txt", std::ios::out);
