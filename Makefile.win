@@ -1,0 +1,21 @@
+BUILD_DIR = build
+CFLAGS = /O2 /D__WIN32__=1 /DMULTI /EHsc
+CPPFLAGS = /O2 /D__WIN32__=1 /DMULTI /EHsc
+LDFLAGS = /ENTRY:main
+OBJFILES = $(BUILD_DIR)\class.obj $(BUILD_DIR)\common.obj $(BUILD_DIR)\main.obj $(BUILD_DIR)\SAtarget.obj $(BUILD_DIR)\solution.obj $(BUILD_DIR)\student.obj $(BUILD_DIR)\utf8.obj
+SOURCES = class.cpp common.cpp main.cpp SAtarget.cpp solution.cpp student.cpp utf8.c
+
+{}.cpp{$(BUILD_DIR)}.obj::
+    $(CPP) $(CPPFLAGS) $<
+
+{}.c{$(BUILD_DIR)}.obj::
+    $(CC) $(CFLAGS) $<
+
+all: $(BUILD_DIR)\classify.exe
+
+clean:
+    del $(BUILD_DIR)\classify.exe
+    del *.obj
+
+"$(BUILD_DIR)\classify.exe": $(SOURCES)
+    $(CC) $(CFLAGS) $** /link /OUT:$@
