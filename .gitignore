@@ -2,6 +2,7 @@
 *.obj
 *.txt
 *.o
+*.asm
 .vscode/*
 build/*
 test*
