@@ -1,7 +1,17 @@
+# Object and executable files
 *.exe
 *.obj
-*.txt
 *.o
+
+# Assembly files
+*.asm
+
+# Test files
+test*
+*.txt
+*.in
+*.out
+
+# Directories
 .vscode/*
 build/*
-test*
