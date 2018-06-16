@@ -24,7 +24,7 @@
  *
  */
 
-#ifdef __WIN32__
+#ifdef WIN32
 #include <windows.h>
 #else
 #include <iconv.h>
@@ -39,7 +39,7 @@
 #include "utf8.h"
 
 
-#ifdef __WIN32__
+#ifdef WIN32
 void utf8_to_gb(const char* src, char* dst, int len)
 {
     int ret = 0;
