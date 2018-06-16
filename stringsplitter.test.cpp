@@ -15,7 +15,7 @@ int main(){
   int segs = 0;
   char delim = '\0';
   while(fgets(buf, 200, fin) != NULL){
-    //printf("String received: %s\n", buf);
+    printf("String received: %s\n", buf);
     std::string tmp = std::string(buf);
     tmp = tmp.substr(0, tmp.size() - 1);
     if(tmp.empty()){
