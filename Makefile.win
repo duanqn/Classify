@@ -1,6 +1,6 @@
 BUILD_DIR = build
-CFLAGS = /O2 /D__WIN32__=1 /DMULTI /DTIME /EHsc
-CPPFLAGS = /O2 /D__WIN32__=1 /DMULTI /DTIME /EHsc
+CFLAGS = /O2 /DWIN32 /DMULTI /DTIME /EHsc
+CPPFLAGS = /O2 /DWIN32 /DMULTI /DTIME /EHsc
 LDFLAGS = /ENTRY:main
 OBJFILES = $(BUILD_DIR)\class.obj $(BUILD_DIR)\common.obj $(BUILD_DIR)\main.obj $(BUILD_DIR)\SAtarget.obj $(BUILD_DIR)\solution.obj $(BUILD_DIR)\student.obj $(BUILD_DIR)\utf8.obj
 SOURCES = class.cpp common.cpp main.cpp SAtarget.cpp solution.cpp student.cpp utf8.c
@@ -19,3 +19,8 @@ clean:
 
 "$(BUILD_DIR)\classify.exe": $(SOURCES)
     $(CC) $(CFLAGS) $** /link /OUT:$@
+
+test: "$(BUILD_DIR)\teststringsplitter.exe"
+
+"$(BUILD_DIR)\teststringsplitter.exe": "stringsplitter.cpp" "stringsplitter.test.cpp"
+    $(CPP) $(CPPFLAGS) $** /link /OUT:$@
