@@ -90,6 +90,51 @@ void Solution::applyRandomMove(){
   lastmove_class_2 = vClass[c1];
 }
 
+double Solution::calcMinEntropy(){
+  std::vector<int> number;
+  int total = 0;
+  double avg = 0;
+  double loss = 0;
+  int nClass = vClass.size();
+  for(int i = 0; i < nClass; ++i){
+    total += vClass[i]->countMale();
+  }
+  for(int i = 0; i < nClass; ++i){
+    if(i < total % nClass){
+      number.push_back(total / nClass + 1);
+    }
+    else{
+      number.push_back(total / nClass);
+    }
+  }
+  avg = total / (double)nClass;
+  for(int i = 0; i < nClass; ++i){
+    loss += (number[i] - avg) * (number[i] - avg);
+  }
+
+  number.clear();
+  total = 0;
+  avg = 0;
+
+  for(int i = 0; i < nClass; ++i){
+    total += vClass[i]->countFemale();
+  }
+  for(int i = 0; i < nClass; ++i){
+    if(i < total % nClass){
+      number.push_back(total / nClass + 1);
+    }
+    else{
+      number.push_back(total / nClass);
+    }
+  }
+  avg = total / (double)nClass;
+  for(int i = 0; i < nClass; ++i){
+    loss += (number[i] - avg) * (number[i] - avg);
+  }
+
+  return loss / nClass;
+}
+
 double Solution::evalEntropy(){
   //要求：
   //男女生数量
@@ -243,6 +288,7 @@ std::ostream & operator << (std::ostream &os, const Solution &s){
   os << u8"<<<<<方案结束<<<<<" << std::endl;
   #ifdef DEBUG
   os << u8"熵： " << s.func << std::endl;
+  os << u8"熵下界： " << s.calcMinEntropy() << std::endl;
   #endif
   return os;
 }

@@ -51,6 +51,8 @@ class Solution: public SAtarget{
   virtual void applyRandomMove();
   virtual void undoLastMove();
   virtual void run();
+
+  double calcMinEntropy();
   
   //friend std::wostream & operator << (std::wostream &os, const Solution &s);
   friend std::ostream & operator << (std::ostream &os, const Solution &s);
