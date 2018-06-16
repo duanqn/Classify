@@ -90,7 +90,7 @@ void Solution::applyRandomMove(){
   lastmove_class_2 = vClass[c1];
 }
 
-double Solution::calcMinEntropy(){
+double Solution::calcMinEntropy() const {
   std::vector<int> number;
   int total = 0;
   double avg = 0;

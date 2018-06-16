@@ -52,7 +52,7 @@ class Solution: public SAtarget{
   virtual void undoLastMove();
   virtual void run();
 
-  double calcMinEntropy();
+  double calcMinEntropy() const;
   
   //friend std::wostream & operator << (std::wostream &os, const Solution &s);
   friend std::ostream & operator << (std::ostream &os, const Solution &s);
