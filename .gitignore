@@ -15,3 +15,6 @@ test*
 # Directories
 .vscode/*
 build/*
+
+# Experimental files
+winmain.cpp
