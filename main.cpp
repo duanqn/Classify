@@ -140,6 +140,6 @@ int main(){
     delete array[i];
   }
   delete[] array;
-  #endif
+  #endif  // DEBUG
   return 0;
 }
