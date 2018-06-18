@@ -24,8 +24,8 @@ namespace duanqn{
 #define INIT_TEMP 1
 #define TEMP_DROP_RATE 0.97
 #define STOP_TEMP 0.001
-const int n_instance = 4;
 
+const int n_instance = 4;
 
 
 std::string toUTF8String(const wchar_t * str, int len);
