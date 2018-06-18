@@ -26,4 +26,5 @@ public:
 };
 
 void split( std::string const& str, std::vector<StringRef> &result, char delimiter = ' ' );
+void split( std::string const& str, std::vector<std::string> &result, char delimiter = ' ' );
 #endif // STRINGSPLITTER_H_

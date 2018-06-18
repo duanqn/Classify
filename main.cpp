@@ -17,7 +17,6 @@
 #include <ctime>
 #endif
 
-int Student::s_numSubject = 3;
 
 
 int main(){

@@ -28,3 +28,11 @@ void split( std::string const& str, std::vector<StringRef> &result, char delimit
     result.push_back( StringRef( pTokenBegin, &*str.end() - pTokenBegin ) );
   }
 }
+
+void split( std::string const& str, std::vector<std::string> &result, char delimiter = ' ' ){
+  std::vector<StringRef> _res;
+  split(str, _res, delimiter);
+  for(auto it = _res.begin(); it != _res.end(); ++it){
+    result.push_back(std::string(it->begin(), it->size()));
+  }
+}
