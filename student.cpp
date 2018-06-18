@@ -23,10 +23,10 @@ std::istream & operator >>(std::istream &is, Student &s){
   int tmp;
   is >> tmp;
   if(tmp == 1){
-    s.m_gender = Student::Male;
+    s.m_gender = Gender::Male;
   }
   else{
-    s.m_gender = Student::Female;
+    s.m_gender = Gender::Female;
   }
   
   s.m_score.clear();
@@ -58,7 +58,7 @@ std::wostream & operator << (std::wostream &wos, Student &s){
 
 std::ostream & operator << (std::ostream &os, const Student &s){
   os << GB2312toUTF8(s.getName()) << " ";
-  if(s.getGender() == Student::Male){
+  if(s.getGender() == Gender::Male){
     os << "M ";
   }
   else{

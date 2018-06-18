@@ -1,12 +1,12 @@
 ﻿#ifndef STUDENT_H_
 #define STUDENT_H_
+#include "gender.h"
 #include "common.h"
 #include <string>
 #include <vector>
 class Class;
 class Student{
   public:
-  enum Gender {Male, Female};
   static int s_numSubject;
   
   protected:
