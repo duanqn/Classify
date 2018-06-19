@@ -29,7 +29,7 @@ void split( std::string const& str, std::vector<StringRef> &result, char delimit
   }
 }
 
-void split( std::string const& str, std::vector<std::string> &result, char delimiter = ' ' ){
+void split( std::string const& str, std::vector<std::string> &result, char delimiter){
   std::vector<StringRef> _res;
   split(str, _res, delimiter);
   for(auto it = _res.begin(); it != _res.end(); ++it){
