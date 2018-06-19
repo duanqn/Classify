@@ -6,6 +6,7 @@ parser.add_argument('numClasses', metavar='N_CLS', type=int, help='the number of
 parser.add_argument('numSubjects', metavar='N_SBJ', type=int, help='the number of subjects')
 parser.add_argument('--maleRatio', '-m', metavar='male%', default = 0.5, type=float, help='the percentage of male students')
 parser.add_argument('--filename', '-f', default='input.txt', type=str, help='the file to save the data')
+parser.add_argument('--delimiter', '-d', default=' ', type=str, help='the delimiter between columns')
 
 args = parser.parse_args()
 
@@ -14,13 +15,20 @@ random.seed()
 
 with open(args.filename, 'w') as f:
     f.write(str(args.numStudents) + " " + str(args.numClasses) + " " + str(args.numSubjects) + "\n")
+    segs = []
     for i in range(0, args.numStudents):
-        f.write("Name_" + str(i) + " ")
+        segs.clear()
+        segs.append("Name_" + str(i))
         randnum = random.random()
         if randnum < args.maleRatio:
-            f.write("1 ")
+            segs.append("1")
         else:
-            f.write("0 ")
+            segs.append("0")
+        segs.append(str(i+1))
+        total = 0
         for j in range(0, args.numSubjects):
-            f.write(str(random.randrange(20, 101)) + " ")
-        f.write("\n")
+            score = random.randrange(20, 101)
+            total += score
+            segs.append(str(score))
+        segs.append(str(total))
+        f.write(args.delimiter.join(segs) + '\n')
