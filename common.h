@@ -13,7 +13,6 @@
 #define TEMP_DROP_RATE 0.97
 #define STOP_TEMP 0.001
 
-int Student::s_numSubject = 3;
 
 const int n_instance = 4;
 const char cg_in_delimiter = ',';  // delimiter for CSV

@@ -4,6 +4,7 @@
 #include "stringsplitter.h"
 
 int Student::serial = 0;
+int Student::s_numSubject = -1;  // default value is useless
 
 Student::Student(){
   m_serial = Student::serial++; // This is not multithread-safe
