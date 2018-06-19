@@ -40,9 +40,9 @@ endif
 $(info $$BUILD_DIR is [$(BUILD_DIR)])
 $(info $$MKDIR_P is [$(MKDIR_P)])
 
-SRC_FILES_CPP := $(wildcard *.cpp)
+SRC_FILES_CPP := class.cpp common.cpp datafield.cpp main.cpp SAtarget.cpp stringsplitter.cpp student.cpp solution.cpp
 OBJ_FILES_CPP := $(patsubst %.cpp,$(BUILD_DIR)$(SEP)%.oxx,$(SRC_FILES_CPP))
-SRC_FILES_C := $(wildcard *.c)
+SRC_FILES_C := utf8.c
 OBJ_FILES_C := $(patsubst %.c,$(BUILD_DIR)$(SEP)%.o,$(SRC_FILES_C))
 HEADER_FILES := $(wildcard *.h)
 HEADER_FILES_TEMPLATE := $(wildcard *.hpp)
@@ -68,6 +68,17 @@ $(BUILD_DIR)$(SEP)%.oxx: %.cpp $(HEADER_FILES) $(HEADER_FILES_TEMPLATE)
 
 $(BUILD_DIR)$(SEP)%.o: %.c $(HEADER_FILES) $(HEADER_FILES_TEMPLATE)
 	$(CC) $(CFLAGS) -c -o $@ $<
+
+test: $(BUILD_DIR)$(SEP)stringsplitter_test
+
+$(BUILD_DIR)$(SEP)stringsplitter.test.o: stringsplitter.test.cpp
+	$(CC) $(CFLAGS) -c -o $@ $<
+
+$(BUILD_DIR)$(SEP)stringsplitter.o: stringsplitter.cpp
+	$(CC) $(CFLAGS) -c -o $@ $<
+
+$(BUILD_DIR)$(SEP)stringsplitter_test: $(BUILD_DIR)$(SEP)stringsplitter.o $(BUILD_DIR)$(SEP)stringsplitter.test.o
+	$(LD) -o $@ $^ $(LDFLAGS)
 
 clean:
 	$(RM_Q) $(BUILD_DIR)$(SEP)*
