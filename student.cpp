@@ -1,6 +1,7 @@
 #include "student.h"
 #include <iostream>
 #include <cassert>
+#include "stringsplitter.h"
 
 int Student::serial = 0;
 
@@ -14,28 +15,24 @@ Student::~Student(){
 void Student::fillScoreVector(std::vector<double> &res){
   res.clear();
   for(int i = 0; i < s_numSubject; ++i){
-    res.push_back(m_score[i]);
+    res.push_back(getScore(i));
   }
 }
 
 std::istream & operator >>(std::istream &is, Student &s){
-  is >> s.m_name;
-  int tmp;
-  is >> tmp;
-  if(tmp == 1){
-    s.m_gender = Gender::Male;
+  std::string line;
+  std::getline(is, line);
+  std::vector<std::string> segments;
+  split(line, segments, cg_in_delimiter);
+  unsigned int nFields = sizeof(cg_student_field_ordered) / sizeof(DataType);
+  if(nFields != segments.size()){
+    throw duanqn::E_BADFORMAT;
   }
-  else{
-    s.m_gender = Gender::Female;
+
+  for(unsigned int i = 0; i < nFields; ++i){
+    s.m_fields[i].fromString(segments[i], cg_student_field_ordered[i]);
   }
-  
-  s.m_score.clear();
-  double tmpscore;
-  for(int i = 0; i < s.s_numSubject; ++i){
-    is >> tmpscore;
-    s.m_score.push_back(tmpscore);
-  }
-  
+  // TODO: sort entries and set infoloc, genderloc, scoreloc
   return is;
 }
 
@@ -57,15 +54,9 @@ std::wostream & operator << (std::wostream &wos, Student &s){
 */
 
 std::ostream & operator << (std::ostream &os, const Student &s){
-  os << GB2312toUTF8(s.getName()) << " ";
-  if(s.getGender() == Gender::Male){
-    os << "M ";
-  }
-  else{
-    os << "F ";
-  }
-  for(int i = 0; i < Student::s_numSubject; ++i){
-    os << s.getScore(i) << " ";
+  unsigned int nFields = sizeof(cg_student_field_ordered) / sizeof(DataType);
+  for(unsigned int i = 0; i < nFields; ++i){
+    os << s.m_fields[i].toUTF8String() << cg_out_delimiter;
   }
   os << std::endl;
   return os;

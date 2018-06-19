@@ -4,6 +4,7 @@
 #include "common.h"
 #include <string>
 #include <vector>
+#include "datafield.h"
 class Class;
 class Student{
   public:
@@ -16,9 +17,15 @@ class Student{
   
   //  学生信息：
   //  姓名、性别、成绩
+  /*
   std::string m_name;
   Gender m_gender;
   std::vector<double> m_score;
+  */
+  std::vector<DataField> m_fields;
+  int m_infoloc;
+  int m_genderloc;
+  int m_scoreloc;
   
   // ban copy-constructors
   Student(const Student &);
@@ -27,21 +34,29 @@ class Student{
   Student();
   ~Student();
   double getScore(int subject) const {
-    return m_score[subject];
+    if(m_fields[m_scoreloc + subject].type != DataType::SCORE){
+      throw duanqn::E_BADFORMAT;
+    }
+    return m_fields[m_scoreloc + subject].value.score;
   }
   void setScore(int subject, double val){
-    m_score[subject] = val;
+    if(m_fields[m_scoreloc + subject].type != DataType::SCORE){
+      throw duanqn::E_BADFORMAT;
+    }
+    m_fields[m_scoreloc + subject].value.score = val;
   }
   bool isMale() const {
-    return m_gender == Male;
+    if(m_fields[m_genderloc].type != DataType::GENDER){
+      throw duanqn::E_BADFORMAT;
+    }
+    return m_fields[m_genderloc].value.gender == Gender::Male;
   }
 
   inline const Gender getGender() const {
-    return m_gender;
-  }
-
-  inline const std::string getName() const {
-    return m_name;
+    if(m_fields[m_genderloc].type != DataType::GENDER){
+      throw duanqn::E_BADFORMAT;
+    }
+    return m_fields[m_genderloc].value.gender;
   }
 
   void fillScoreVector(std::vector<double> &res);
