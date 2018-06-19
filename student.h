@@ -5,7 +5,6 @@
 #include <string>
 #include <vector>
 #include "datafield.h"
-class Class;
 class Student{
   public:
   static int s_numSubject;
