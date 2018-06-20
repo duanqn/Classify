@@ -22,7 +22,6 @@ class Student{
   std::vector<double> m_score;
   */
   std::vector<DataField> m_fields;
-  int m_infoloc;
   int m_genderloc;
   int m_scoreloc;
   
