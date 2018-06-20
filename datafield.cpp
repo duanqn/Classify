@@ -6,7 +6,7 @@ std::string toString(const DataField &d){
   case DataType::INFO:
   case DataType::INFO_UNIQUE:
   case DataType::INFO_GB2312:
-    return d.value.info;
+    return std::string(d.value.info);
     // returned
   case DataType::SCORE:
     return std::to_string(d.value.score);
@@ -25,7 +25,7 @@ std::string toString(const DataField &d){
 
 std::string DataField::toUTF8String() const {
   if(type == DataType::INFO_GB2312){
-    return GB2312toUTF8(value.info);
+    return GB2312toUTF8(std::string(value.info));
   }
   else if(type == DataType::GENDER){
     if(value.gender == Gender::Female){
@@ -52,11 +52,15 @@ DataField fromString(const std::string &s, DataType t){
 }
 
 void DataField::fromString(const std::string &s, DataType t){
+  type = t;
   switch(t){
   case DataType::INFO:
   case DataType::INFO_UNIQUE:
   case DataType::INFO_GB2312:
-    value.info = s;
+    if(value.info != nullptr){
+      delete[] value.info;
+    }
+    value.info = new char[s.size() + 1];
     break;
   case DataType::SCORE:
     value.score = std::stod(s, nullptr);

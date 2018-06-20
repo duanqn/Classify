@@ -4,42 +4,55 @@
 #include <string>
 #include "gender.h"
 #include "errcode.h"
+#include <cstdio>
 
 enum DataType{INFO, INFO_UNIQUE, INFO_GB2312, GENDER, SCORE, DUMP};
 
-union DataContent{
-  std::string info; // type = info, info_unique or dump
+struct DataContent{
+  char * info; // type = info, info_unique or dump
   double score;     // type = score
   Gender gender;    // type = gender
   DataContent(){
+    gender = Gender::Male;
     score = 0;
+    info = nullptr;
   }
-  ~DataContent(){}
+  DataContent(DataContent && d){
+    gender = d.gender;
+    score = d.score;
+    info = d.info;
+    d.info = nullptr;
+  }
+  DataContent& operator = (DataContent && d){
+    gender = d.gender;
+    score = d.score;
+    info = d.info;
+    d.info = nullptr;
+    return *this;
+  }
+  ~DataContent(){
+    if(info != nullptr){
+      delete[] info;
+    }
+  }
 };
 
 struct DataField{
   enum DataType type;
-  union DataContent value;
+  struct DataContent value;
 
   DataField(): value(){
     type = DataType::DUMP;
   }
-  ~DataField(){}
-  DataField(DataField &&t){
-    switch(t.type){
-    case SCORE:
-      value.score = t.value.score;
-      break;
-    case GENDER:
-      value.gender = t.value.gender;
-      break;
-    case INFO:
-      value.info = std::move(t.value.info);
-      break;
-    default:
-      value.score = 0;
-    }
+  DataField(DataField && d): value(std::move(d.value)){
+    type = d.type;
   }
+  DataField& operator = (DataField && d){
+    type = d.type;
+    value = std::move(d.value);
+    return *this;
+  }
+  ~DataField(){}
   std::string toString() const;
   std::string toUTF8String() const;
   void fromString(const std::string &s, DataType t);
