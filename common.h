@@ -14,7 +14,7 @@
 #define STOP_TEMP 0.001
 
 
-const int n_instance = 4;
+const int n_instance = 8;
 const char cg_in_delimiter = ',';  // delimiter for CSV
 const char cg_out_delimiter = ' ';
 const enum DataType cg_student_field_ordered[] = {
