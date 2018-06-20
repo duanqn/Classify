@@ -8,6 +8,8 @@ int Student::s_numSubject = -1;  // default value is useless
 
 Student::Student(){
   m_serial = Student::serial++; // This is not multithread-safe
+  m_genderloc = 0;
+  m_scoreloc = 0;
 }
 
 Student::~Student(){
@@ -29,11 +31,29 @@ std::istream & operator >>(std::istream &is, Student &s){
   if(nFields != segments.size()){
     throw duanqn::E_BADFORMAT;
   }
-
   for(unsigned int i = 0; i < nFields; ++i){
-    s.m_fields[i].fromString(segments[i], cg_student_field_ordered[i]);
+    s.m_fields.push_back(fromString(segments[i], cg_student_field_ordered[i]));
   }
   // TODO: sort entries and set infoloc, genderloc, scoreloc
+  for(int i = 0; i < nFields - 1; ++i){
+    for(int j = i + 1; j < nFields; ++j){
+      if(int(s.m_fields[i].type) > int(s.m_fields[j].type)){
+        DataField t = std::move(s.m_fields[j]);
+        s.m_fields[j] = std::move(s.m_fields[i]);
+        s.m_fields[i] = std::move(t);
+      }
+    }
+  }
+  for(int i = nFields - 1; i >= 0; --i){
+    switch(s.m_fields[i].type){
+    case DataType::GENDER:
+      s.m_genderloc = i;
+      break;
+    case DataType::SCORE:
+      s.m_scoreloc = i;
+      break;
+    }
+  }
   return is;
 }
 
