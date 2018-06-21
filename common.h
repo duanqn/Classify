@@ -18,7 +18,7 @@ const int n_instance = 8;
 const char cg_in_delimiter = ',';  // delimiter for CSV
 const char cg_out_delimiter = ' ';
 const enum DataType cg_student_field_ordered[] = {
-  INFO_GB2312,         // 姓名
+  INFO,         // 姓名
   GENDER,       // 性别
   INFO_UNIQUE,  // 学号
   SCORE,        // 语文

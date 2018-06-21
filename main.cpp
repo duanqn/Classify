@@ -78,17 +78,25 @@ int main(){
     array[i] = new Solution(INIT_TEMP, TEMP_DROP_RATE, STOP_TEMP, numStudents*numStudents / 3);
     array[i]->init(numClasses);
   }
+
+  std::getline(datafile, filename);
   
   Student::s_numSubject = numSubjects;
   Student *s;
-  for(int i = 0; i < numStudents; ++i){
-    s = new Student();
-    datafile >> *s;
-    for(int j = 0; j < n_instance; ++j){
-      array[j]->addStudent(s);
+  try{
+    for(int i = 0; i < numStudents; ++i){
+      s = new Student();
+      datafile >> *s;
+      for(int j = 0; j < n_instance; ++j){
+        array[j]->addStudent(s);
+      }
+      //std::cout << *s;
     }
-    //std::cout << *s;
   }
+  catch(const duanqn::ERRCODE &e){
+    std::cout << e << std::endl;
+  }
+  
   datafile.close();
 
   double minEntropy = 2147483647;

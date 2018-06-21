@@ -1,7 +1,11 @@
 #include "datafield.h"
 #include "common.h"
+#include <sstream>
+#include <iomanip>
+#include <memory.h>
 
 std::string toString(const DataField &d){
+  std::stringstream stream;
   switch(d.type){
   case DataType::INFO:
   case DataType::INFO_UNIQUE:
@@ -9,7 +13,8 @@ std::string toString(const DataField &d){
     return std::string(d.value.info);
     // returned
   case DataType::SCORE:
-    return std::to_string(d.value.score);
+    stream << std::fixed << std::setprecision(1) << d.value.score;
+    return stream.str();
     // returned
   case DataType::GENDER:
     return std::to_string((int)(d.value.gender));
@@ -61,6 +66,7 @@ void DataField::fromString(const std::string &s, DataType t){
       delete[] value.info;
     }
     value.info = new char[s.size() + 1];
+    memcpy(value.info, s.c_str(), s.size());
     break;
   case DataType::SCORE:
     value.score = std::stod(s, nullptr);

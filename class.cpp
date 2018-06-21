@@ -104,7 +104,10 @@ std::ostream & operator << (std::ostream & os, const Class &c){
   std::vector<double> avgs;
   c.fillAvgScoreVector(avgs);
   for(int i = 0; i < avgs.size(); ++i){
-    os << avgs[i] << " ";
+    if(i > 0){
+      os << " ";
+    }
+    os << avgs[i];
   }
   os << std::endl;
   for(auto it = c.m_students.begin(); it != c.m_students.end(); ++it){
