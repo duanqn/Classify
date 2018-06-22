@@ -33,8 +33,6 @@ std::istream & operator >>(std::istream &is, Student &s){
   }
   for(unsigned int i = 0; i < nFields; ++i){
     s.m_fields.push_back(fromString(segments[i], cg_student_field_ordered[i]));
-    std::cout << "Got segment " << segments[i] << std::endl;
-    std::cout << "Parsed: " << s.m_fields[i].toString() << std::endl;
   }
   // TODO: sort entries and set infoloc, genderloc, scoreloc
   for(int i = 0; i < nFields - 1; ++i){
