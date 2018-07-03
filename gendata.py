@@ -14,7 +14,7 @@ print(args)
 random.seed()
 
 with open(args.filename, 'w') as f:
-    f.write(str(args.numStudents) + " " + str(args.numClasses) + " " + str(args.numSubjects) + "\n")
+    #f.write(str(args.numStudents) + " " + str(args.numClasses) + " " + str(args.numSubjects) + "\n")
     segs = []
     for i in range(0, args.numStudents):
         segs.clear()

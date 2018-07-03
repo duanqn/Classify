@@ -26,6 +26,7 @@ const enum DataType cg_student_field_ordered[] = {
   SCORE,        // 英语
   DUMP          // 总分
 };
+const unsigned cgu_nFields = sizeof(cg_student_field_ordered) / sizeof(DataType);
 
 std::string toUTF8String(const wchar_t * str, int len);
 std::string toUTF8String(const std::wstring& str);

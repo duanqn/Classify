@@ -69,17 +69,32 @@ int main(){
   std::ifstream datafile;
   datafile.open(filename, std::ios::in);
   
-  int numStudents, numClasses, numSubjects;
-  datafile >> numStudents >> numClasses >> numSubjects;
-  std::cout << numStudents << " " << numClasses << std::endl;
+  int numStudents = 0, numClasses = 0, numSubjects = 0;
+  std::string line;
+  // count lines
+  while(std::getline(datafile, line)){
+    ++numStudents;
+  }
+  datafile.close();
+
+  std::cout << numStudents << " students" << std::endl;
+  std::cout << "Please input number of classes: ";
+  std::cin >> numClasses;
+
+  // count subjects
+  for(unsigned int i = 0; i < cgu_nFields; ++i){
+    if(cg_student_field_ordered[i] == DataType::SCORE){
+      ++numSubjects;
+    }
+  }
+
+  datafile.open(filename, std::ios::in);
   
   Solution **array = new Solution* [n_instance];
   for(int i = 0; i < n_instance; ++i){
     array[i] = new Solution(INIT_TEMP, TEMP_DROP_RATE, STOP_TEMP, numStudents*numStudents / 3);
     array[i]->init(numClasses);
   }
-
-  std::getline(datafile, filename);
   
   Student::s_numSubject = numSubjects;
   Student *s;

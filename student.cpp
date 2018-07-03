@@ -27,16 +27,15 @@ std::istream & operator >>(std::istream &is, Student &s){
   std::getline(is, line);
   std::vector<std::string> segments;
   split(line, segments, cg_in_delimiter);
-  unsigned int nFields = sizeof(cg_student_field_ordered) / sizeof(DataType);
-  if(nFields != segments.size()){
+  if(cgu_nFields != segments.size()){
     throw duanqn::E_BADFORMAT;
   }
-  for(unsigned int i = 0; i < nFields; ++i){
+  for(unsigned int i = 0; i < cgu_nFields; ++i){
     s.m_fields.push_back(fromString(segments[i], cg_student_field_ordered[i]));
   }
   // TODO: sort entries and set infoloc, genderloc, scoreloc
-  for(int i = 0; i < nFields - 1; ++i){
-    for(int j = i + 1; j < nFields; ++j){
+  for(unsigned i = 0; i < cgu_nFields - 1; ++i){
+    for(unsigned j = i + 1; j < cgu_nFields; ++j){
       if(int(s.m_fields[i].type) > int(s.m_fields[j].type)){
         DataField t = std::move(s.m_fields[j]);
         s.m_fields[j] = std::move(s.m_fields[i]);
@@ -44,7 +43,7 @@ std::istream & operator >>(std::istream &is, Student &s){
       }
     }
   }
-  for(int i = nFields - 1; i >= 0; --i){
+  for(int i = (int)cgu_nFields - 1; i >= 0; --i){
     switch(s.m_fields[i].type){
     case DataType::GENDER:
       s.m_genderloc = i;
@@ -75,10 +74,9 @@ std::wostream & operator << (std::wostream &wos, Student &s){
 */
 
 std::ostream & operator << (std::ostream &os, const Student &s){
-  unsigned int nFields = sizeof(cg_student_field_ordered) / sizeof(DataType);
   std::string str;
   bool first = true;
-  for(unsigned int i = 0; i < nFields; ++i){
+  for(unsigned int i = 0; i < cgu_nFields; ++i){
     str = std::move(s.m_fields[i].toUTF8String());
     if(str.size() > 0){
       if(!first){
