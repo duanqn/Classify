@@ -1,4 +1,4 @@
-#include "datafield.h"
+﻿#include "datafield.h"
 #include "common.h"
 #include <sstream>
 #include <iomanip>
@@ -66,7 +66,7 @@ void DataField::fromString(const std::string &s, DataType t){
       delete[] value.info;
     }
     value.info = new char[s.size() + 1];
-    memcpy(value.info, s.c_str(), s.size());
+    memcpy(value.info, s.c_str(), s.size() + 1);
     break;
   case DataType::SCORE:
     value.score = std::stod(s, nullptr);
