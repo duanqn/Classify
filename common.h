@@ -18,12 +18,16 @@ const int n_instance = 8;
 const char cg_in_delimiter = ',';  // delimiter for CSV
 const char cg_out_delimiter = ' ';
 const enum DataType cg_student_field_ordered[] = {
-  INFO,         // 姓名
+  INFO_GB2312,         // 姓名
   GENDER,       // 性别
   INFO_UNIQUE,  // 学号
   SCORE,        // 语文
   SCORE,        // 数学
   SCORE,        // 英语
+  SCORE,        // 物理
+  SCORE,        // 化学
+  SCORE,        // 生物
+  SCORE,        // 政治
   DUMP          // 总分
 };
 const unsigned cgu_nFields = sizeof(cg_student_field_ordered) / sizeof(DataType);
