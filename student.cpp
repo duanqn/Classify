@@ -28,6 +28,7 @@ std::istream & operator >>(std::istream &is, Student &s){
   std::vector<std::string> segments;
   split(line, segments, cg_in_delimiter);
   if(cgu_nFields != segments.size()){
+    std::cout << "Expecting " << cgu_nFields << " fields but got " << segments.size() << std::endl;
     throw duanqn::E_BADFORMAT;
   }
   for(unsigned int i = 0; i < cgu_nFields; ++i){
