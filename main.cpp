@@ -117,7 +117,7 @@ int main(){
     }
   }
   catch(const duanqn::ERRCODE &e){
-    std::cout << e << std::endl;
+    std::cout << "ERROR: " << e << std::endl;
   }
   
   datafile.close();
