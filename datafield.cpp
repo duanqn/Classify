@@ -69,7 +69,13 @@ void DataField::fromString(const std::string &s, DataType t){
     memcpy(value.info, s.c_str(), s.size() + 1);
     break;
   case DataType::SCORE:
-    value.score = std::stod(s, nullptr);
+    if(s.empty()){
+      // Missing score
+      value.score = 0;
+    }
+    else{
+      value.score = std::stod(s, nullptr);
+    }
     break;
   case DataType::GENDER:
     value.gender = (Gender)(std::stoi(s, nullptr));
