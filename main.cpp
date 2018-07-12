@@ -65,6 +65,10 @@ int main(){
   std::string filename;
   std::cout << "Please input filename: ";
   std::cin >> filename;
+
+  int nTitleRow = 0;
+  std::cout << "Please give the number of title rows: ";
+  std::cin >> nTitleRow;
   
   std::ifstream datafile;
   datafile.open(filename, std::ios::in);
@@ -75,6 +79,7 @@ int main(){
   while(std::getline(datafile, line)){
     ++numStudents;
   }
+  numStudents -= nTitleRow;
   datafile.close();
 
   std::cout << numStudents << " students" << std::endl;
@@ -99,6 +104,9 @@ int main(){
   Student::s_numSubject = numSubjects;
   Student *s;
   try{
+    for(int i = 0; i < nTitleRow; ++i){
+      std::getline(datafile, line);
+    }
     for(int i = 0; i < numStudents; ++i){
       s = new Student();
       datafile >> *s;
