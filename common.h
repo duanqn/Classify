@@ -7,8 +7,8 @@
 //#define NSUBJECT 3
 
 #define INIT_ACCEPTANCE 0.9
-#define GENDER_WEIGHT 5
-#define TOTAL_WEIGHT 1.0
+#define GENDER_WEIGHT 10.0
+#define TOTAL_WEIGHT 5.0
 #define INIT_TEMP 1
 #define TEMP_DROP_RATE 0.97
 #define STOP_TEMP 0.001
@@ -24,10 +24,6 @@ const enum DataType cg_student_field_ordered[] = {
   SCORE,        // 语文
   SCORE,        // 数学
   SCORE,        // 英语
-  SCORE,        // 物理
-  SCORE,        // 化学
-  SCORE,        // 生物
-  SCORE,        // 政治
   DUMP          // 总分
 };
 const unsigned cgu_nFields = sizeof(cg_student_field_ordered) / sizeof(DataType);
