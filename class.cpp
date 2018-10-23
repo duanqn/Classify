@@ -103,13 +103,15 @@ std::ostream & operator << (std::ostream & os, const Class &c){
   os << u8"平均分： ";
   std::vector<double> avgs;
   c.fillAvgScoreVector(avgs);
+  double overall = 0;
   for(int i = 0; i < avgs.size(); ++i){
     if(i > 0){
       os << " ";
     }
+    overall += avgs[i];
     os << avgs[i];
   }
-  os << std::endl;
+  os << " " << overall << std::endl;
   for(auto it = c.m_students.begin(); it != c.m_students.end(); ++it){
     os << **it;
   }
