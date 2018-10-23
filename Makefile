@@ -3,7 +3,7 @@ EXEC_NAME_PREFIX = classify
 
 CC = g++
 LD = g++
-CFLAGS = -std=c++14 -O2 -DMULTI -DTIME -pthread
+CFLAGS = -std=c++14 -O2 -DMULTI -DTIME
 LDFLAGS = -lpthread
 
 $(info Building initiated...)
