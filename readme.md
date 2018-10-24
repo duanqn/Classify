@@ -50,3 +50,13 @@ N.B. The code on Stack Overflow will skip empty segments.
 [2]: https://github.com/tobbez/string-splitting/blob/master/split6.cpp
 [3]: https://stackoverflow.com/questions/9378500/why-is-splitting-a-string-slower-in-c-than-python/9379203#9379203
 
+## Contribution
+All contribution are welcome, from reporting bugs to implementing new features.
+
+A short to-do list:
+* Check for memory leakage (I know there will be some)
+* Build GUI
+* Replace hard-coded configuration with interactive prompts
+* Detect the number of CPUs before spawning threads
+* Make it easy-to-deploy, easy-to-use
+* Write a user manual
