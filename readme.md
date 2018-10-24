@@ -29,11 +29,13 @@ The program will execute interactively.
 ## Features
 ### Current
 * **Multithread**
+
 The program spawns 8 threads, and each of them runs SA algorithm. The number of threads is hard-coded,
 which could cause a problem, and should be fixed in the future.
 
 ### Future
 * **GUI**
+
 Right now I'm thinking of using Windows native APIs to build the graphical interface, because
 they are well supported and do not require any 3rd party software in runtime.
 
