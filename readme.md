@@ -28,8 +28,14 @@ The program will execute interactively.
 
 ## Features
 ### Current
+* **Multithread**
+The program spawns 8 threads, and each of them runs SA algorithm. The number of threads is hard-coded,
+which could cause a problem, and should be fixed in the future.
+
 ### Future
-* GUI
+* **GUI**
+Right now I'm thinking of using Windows native APIs to build the graphical interface, because
+they are well supported and do not require any 3rd party software in runtime.
 
 ## Open source code
 utf8.h and utf8.c are copied from [lytsing/gbk-utf8][1]. Both files have been modified.
