@@ -1,8 +1,6 @@
 BUILD_DIR_NAME = build
 EXEC_NAME_PREFIX = classify
 
-CC = g++
-LD = g++
 CFLAGS = -std=c++14 -O2 -DMULTI -DTIME
 LDFLAGS = -lpthread
 
@@ -78,7 +76,7 @@ $(BUILD_DIR)$(SEP)stringsplitter.o: stringsplitter.cpp
 	$(CC) $(CFLAGS) -c -o $@ $<
 
 $(BUILD_DIR)$(SEP)stringsplitter_test: $(BUILD_DIR)$(SEP)stringsplitter.o $(BUILD_DIR)$(SEP)stringsplitter.test.o
-	$(LD) -o $@ $^ $(LDFLAGS)
+	$(CC) -o $@ $^ $(LDFLAGS)
 
 clean:
 	$(RM_Q) $(BUILD_DIR)$(SEP)*
