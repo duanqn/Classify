@@ -1,7 +1,8 @@
 BUILD_DIR_NAME = build
 EXEC_NAME_PREFIX = classify
 
-CFLAGS = -std=c++14 -O2 -DMULTI -DTIME
+CFLAGS = -O2 -DMULTI -DTIME
+CXXFLAGS = -std=c++14 $(CFLAGS)
 LDFLAGS = -lpthread
 
 $(info Building initiated...)
@@ -66,7 +67,7 @@ $(BUILD_DIR)$(SEP)%.oxx: %.cpp $(HEADER_FILES) $(HEADER_FILES_TEMPLATE)
 	$(CXX) $(CFLAGS) -c -o $@ $<
 
 $(BUILD_DIR)$(SEP)%.o: %.c $(HEADER_FILES) $(HEADER_FILES_TEMPLATE)
-	$(CXX) $(CFLAGS) -c -o $@ $<
+	$(CC) $(CFLAGS) -c -o $@ $<
 
 test: $(BUILD_DIR)$(SEP)stringsplitter_test
 
