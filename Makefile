@@ -35,6 +35,7 @@ endif
 
 endif
 
+$(info $$CXX is [$(CXX)])
 $(info $$BUILD_DIR is [$(BUILD_DIR)])
 $(info $$MKDIR_P is [$(MKDIR_P)])
 
@@ -59,24 +60,24 @@ $(BUILD_DIR):
 	$(MKDIR_CMD)
 
 $(BUILD_DIR)$(SEP)$(EXEC_NAME): $(OBJ_FILES)
-	$(LD) -o $@ $^ $(LDFLAGS)
+	$(CXX) -o $@ $^ $(LDFLAGS)
 
 $(BUILD_DIR)$(SEP)%.oxx: %.cpp $(HEADER_FILES) $(HEADER_FILES_TEMPLATE)
-	$(CC) $(CFLAGS) -c -o $@ $<
+	$(CXX) $(CFLAGS) -c -o $@ $<
 
 $(BUILD_DIR)$(SEP)%.o: %.c $(HEADER_FILES) $(HEADER_FILES_TEMPLATE)
-	$(CC) $(CFLAGS) -c -o $@ $<
+	$(CXX) $(CFLAGS) -c -o $@ $<
 
 test: $(BUILD_DIR)$(SEP)stringsplitter_test
 
 $(BUILD_DIR)$(SEP)stringsplitter.test.o: stringsplitter.test.cpp
-	$(CC) $(CFLAGS) -c -o $@ $<
+	$(CXX) $(CFLAGS) -c -o $@ $<
 
 $(BUILD_DIR)$(SEP)stringsplitter.o: stringsplitter.cpp
-	$(CC) $(CFLAGS) -c -o $@ $<
+	$(CXX) $(CFLAGS) -c -o $@ $<
 
 $(BUILD_DIR)$(SEP)stringsplitter_test: $(BUILD_DIR)$(SEP)stringsplitter.o $(BUILD_DIR)$(SEP)stringsplitter.test.o
-	$(CC) -o $@ $^ $(LDFLAGS)
+	$(CXX) -o $@ $^ $(LDFLAGS)
 
 clean:
 	$(RM_Q) $(BUILD_DIR)$(SEP)*
