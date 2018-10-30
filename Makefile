@@ -64,7 +64,7 @@ $(BUILD_DIR)$(SEP)$(EXEC_NAME): $(OBJ_FILES)
 	$(CXX) -o $@ $^ $(LDFLAGS)
 
 $(BUILD_DIR)$(SEP)%.oxx: %.cpp $(HEADER_FILES) $(HEADER_FILES_TEMPLATE)
-	$(CXX) $(CFLAGS) -c -o $@ $<
+	$(CXX) $(CXXFLAGS) -c -o $@ $<
 
 $(BUILD_DIR)$(SEP)%.o: %.c $(HEADER_FILES) $(HEADER_FILES_TEMPLATE)
 	$(CC) $(CFLAGS) -c -o $@ $<
@@ -72,10 +72,10 @@ $(BUILD_DIR)$(SEP)%.o: %.c $(HEADER_FILES) $(HEADER_FILES_TEMPLATE)
 test: $(BUILD_DIR)$(SEP)stringsplitter_test
 
 $(BUILD_DIR)$(SEP)stringsplitter.test.o: stringsplitter.test.cpp
-	$(CXX) $(CFLAGS) -c -o $@ $<
+	$(CXX) $(CXXFLAGS) -c -o $@ $<
 
 $(BUILD_DIR)$(SEP)stringsplitter.o: stringsplitter.cpp
-	$(CXX) $(CFLAGS) -c -o $@ $<
+	$(CXX) $(CXXFLAGS) -c -o $@ $<
 
 $(BUILD_DIR)$(SEP)stringsplitter_test: $(BUILD_DIR)$(SEP)stringsplitter.o $(BUILD_DIR)$(SEP)stringsplitter.test.o
 	$(CXX) -o $@ $^ $(LDFLAGS)
