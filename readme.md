@@ -1,4 +1,4 @@
-# Classify [![Build Status](https://travis-ci.org/duanqn/Classify.svg?branch=master)](https://travis-ci.org/duanqn/Classify)
+# Classify [![Build Status](https://travis-ci.org/duanqn/Classify.svg?branch=master)](https://travis-ci.org/duanqn/Classify) [![Build Status](https://dev.azure.com/q7duan/q7duan/_apis/build/status/duanqn.Classify)](https://dev.azure.com/q7duan/q7duan/_build/latest?definitionId=1)
 ## Description
 A tool for arranging students into classes.
 
