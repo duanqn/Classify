@@ -1,3 +1,4 @@
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/21082f135b764fa5938892489c764c31)](https://app.codacy.com/app/duanqn_own_1/Classify?utm_source=github.com&utm_medium=referral&utm_content=duanqn/Classify&utm_campaign=Badge_Grade_Settings)
 # Classify [![Build Status](https://travis-ci.org/duanqn/Classify.svg?branch=master)](https://travis-ci.org/duanqn/Classify) [![Build Status](https://dev.azure.com/q7duan/q7duan/_apis/build/status/duanqn.Classify)](https://dev.azure.com/q7duan/q7duan/_build/latest?definitionId=1)
 ## Description
 A tool for arranging students into classes.
