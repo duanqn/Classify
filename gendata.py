@@ -27,7 +27,11 @@ with open(args.filename, 'w') as f:
         segs.append(str(i+1))
         total = 0
         for j in range(0, args.numSubjects):
-            score = random.randrange(20, 101)
+            score = int(random.gauss(90, 4))
+            if score > 100:
+                score = 100
+            if score < 0:
+                score = 0
             total += score
             segs.append(str(score))
         segs.append(str(total))

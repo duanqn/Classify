@@ -2,6 +2,20 @@
 #include "common.h"
 
 
+const int n_instance = 8;
+const char cg_in_delimiter = ',';  // delimiter for CSV
+const char cg_out_delimiter = ' ';
+enum DataType cg_student_field_ordered[] = {
+  INFO_GB2312,         // 姓名
+  GENDER,       // 性别
+  INFO_UNIQUE,  // 学号
+  SCORE,        // 语文
+  SCORE,        // 数学
+  SCORE,        // 英语
+  DUMP          // 总分
+};
+const unsigned cgu_nFields = sizeof(cg_student_field_ordered) / sizeof(DataType);
+
 int randint(int upperbound){
   return (int)(rand()/(double)RAND_MAX * (upperbound - 1));
 }

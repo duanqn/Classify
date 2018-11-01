@@ -7,30 +7,18 @@
 //#define NSUBJECT 3
 
 #define INIT_ACCEPTANCE 0.9
-#define GENDER_WEIGHT 5
-#define TOTAL_WEIGHT 1.0
+#define GENDER_WEIGHT 10.0
+#define TOTAL_WEIGHT 5.0
 #define INIT_TEMP 1
 #define TEMP_DROP_RATE 0.97
 #define STOP_TEMP 0.001
 
 
-const int n_instance = 8;
-const char cg_in_delimiter = ',';  // delimiter for CSV
-const char cg_out_delimiter = ' ';
-const enum DataType cg_student_field_ordered[] = {
-  INFO_GB2312,         // 姓名
-  GENDER,       // 性别
-  INFO_UNIQUE,  // 学号
-  SCORE,        // 语文
-  SCORE,        // 数学
-  SCORE,        // 英语
-  SCORE,        // 物理
-  SCORE,        // 化学
-  SCORE,        // 生物
-  SCORE,        // 政治
-  DUMP          // 总分
-};
-const unsigned cgu_nFields = sizeof(cg_student_field_ordered) / sizeof(DataType);
+extern const int n_instance;
+extern const char cg_in_delimiter;  // delimiter for CSV
+extern const char cg_out_delimiter;
+extern enum DataType cg_student_field_ordered[];
+extern const unsigned cgu_nFields;
 
 std::string toUTF8String(const wchar_t * str, int len);
 std::string toUTF8String(const std::wstring& str);

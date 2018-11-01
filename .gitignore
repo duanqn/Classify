@@ -9,12 +9,14 @@
 # Test files
 test*
 *.txt
+*.csv
 *.in
 *.out
 
 # Directories
-.vscode/*
-build/*
+.vscode
+build
+.vs
 
 # Experimental files
 winmain.cpp
