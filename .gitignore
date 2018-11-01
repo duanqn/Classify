@@ -17,6 +17,8 @@ test*
 .vscode
 build
 .vs
+Debug
+Release
 
 # Experimental files
 winmain.cpp
