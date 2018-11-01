@@ -10,7 +10,7 @@ jobs:
   steps:
   - task: VSBuild@1
     inputs:
-    - solution: 'Classify.sln'
+      solution: 'Classify.sln'
       vsVersion: 'latest'
 
 - job: Linux
