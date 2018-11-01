@@ -1,4 +1,5 @@
 BUILD_DIR_NAME = build
+SRC_DIR_NAME = linux
 EXEC_NAME_PREFIX = classify
 
 CFLAGS = -O2 -DMULTI -DTIME
@@ -11,6 +12,7 @@ ifeq ($(OS),Windows_NT)
 
 $(info Hello Windows)
 BUILD_DIR := .\$(BUILD_DIR_NAME)
+SRC_DIR := .\$(SRC_DIR_NAME)
 MKDIR_P := md
 MKDIR_CMD := if not exist $(BUILD_DIR) $(MKDIR_P) $(BUILD_DIR)
 RM_Q := del /q
@@ -24,6 +26,7 @@ ifeq ($(UNAME_S),Linux)
 
 $(info Hello Linux)
 BUILD_DIR := ./$(BUILD_DIR_NAME)
+SRC_DIR := ./$(SRC_DIR_NAME)
 MKDIR_P := mkdir -p
 MKDIR_CMD := $(MKDIR_P) $(BUILD_DIR)
 RM_Q := rm -f
@@ -63,10 +66,10 @@ $(BUILD_DIR):
 $(BUILD_DIR)$(SEP)$(EXEC_NAME): $(OBJ_FILES)
 	$(CXX) -o $@ $^ $(LDFLAGS)
 
-$(BUILD_DIR)$(SEP)%.oxx: %.cpp $(HEADER_FILES) $(HEADER_FILES_TEMPLATE)
+$(BUILD_DIR)$(SEP)%.oxx: $(SRC_DIR)$(SEP)%.cpp $(HEADER_FILES) $(HEADER_FILES_TEMPLATE)
 	$(CXX) $(CXXFLAGS) -c -o $@ $<
 
-$(BUILD_DIR)$(SEP)%.o: %.c $(HEADER_FILES) $(HEADER_FILES_TEMPLATE)
+$(BUILD_DIR)$(SEP)%.o: $(SRC_DIR)$(SEP)%.c $(HEADER_FILES) $(HEADER_FILES_TEMPLATE)
 	$(CC) $(CFLAGS) -c -o $@ $<
 
 test: $(BUILD_DIR)$(SEP)stringsplitter_test
