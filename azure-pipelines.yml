@@ -14,7 +14,8 @@ jobs:
       vsVersion: 'latest'
 
 - job: Linux
-  pool: 'Ubuntu 16.04'
+  pool:
+    vmImage: 'Ubuntu 16.04'
   steps:
   - script: |
       make
