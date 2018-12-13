@@ -9,7 +9,7 @@ int CALLBACK enumFontFamilyCallback(
 	OutputDebugString(lpelfe->lfFaceName);
 	OutputDebugString(_T("\n"));
 	std::vector<LOGFONTW> *vec = reinterpret_cast<std::vector<LOGFONTW> *>(lParam);
-	vec->push_back(*dynamic_cast<const LOGFONTW *>(lpelfe));
+	vec->push_back(*reinterpret_cast<const LOGFONTW *>(lpelfe));
 	return 1;
 }
 
