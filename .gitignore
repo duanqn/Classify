@@ -17,6 +17,11 @@ test*
 .vscode
 build
 .vs
+Debug
+Release
+
+# Editor config files
+*.aps
 
 # Experimental files
 winmain.cpp
