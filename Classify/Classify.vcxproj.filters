@@ -27,12 +27,18 @@
     <ClInclude Include="Classify.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="fontHandler.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="Classify.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="fontHandler.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
