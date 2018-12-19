@@ -4,7 +4,7 @@
 # https://docs.microsoft.com/azure/devops/pipelines/apps/c-cpp/gcc
 
 jobs:
-- job: Windows
+- job: Windows-debug-Win32
   pool:
     vmImage: 'vs2017-win2016'
   steps:
@@ -15,6 +15,30 @@ jobs:
       configuration: 'debug'
       Platform: 'x86'
       msbuildArchitecture: 'x86'
+
+- job: Windows-debug-WOW64
+  pool:
+    vmImage: 'vs2017-win2016'
+  steps:
+  - task: VSBuild@1
+    inputs:
+      solution: 'Classify.sln'
+      vsVersion: 'latest'
+      configuration: 'debug'
+      Platform: 'x86'
+      msbuildArchitecture: 'x64'
+
+- job: Windows-debug-Win64
+  pool:
+    vmImage: 'vs2017-win2016'
+  steps:
+  - task: VSBuild@1
+    inputs:
+      solution: 'Classify.sln'
+      vsVersion: 'latest'
+      configuration: 'debug'
+      Platform: 'x64'
+      msbuildArchitecture: 'x64'
 
 - job: Linux
   pool:
