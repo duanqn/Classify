@@ -12,6 +12,9 @@ jobs:
     inputs:
       solution: 'Classify.sln'
       vsVersion: 'latest'
+      configuration: 'debug'
+      Platform: 'x86'
+      msbuildArchitecture: 'x86'
 
 - job: Linux
   pool:
