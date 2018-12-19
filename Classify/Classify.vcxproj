@@ -147,13 +147,34 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\linux\class.h" />
+    <ClInclude Include="..\linux\common.h" />
+    <ClInclude Include="..\linux\datafield.h" />
+    <ClInclude Include="..\linux\errcode.h" />
+    <ClInclude Include="..\linux\gender.h" />
+    <ClInclude Include="..\linux\SAtarget.h" />
+    <ClInclude Include="..\linux\solution.h" />
+    <ClInclude Include="..\linux\stringsplitter.h" />
+    <ClInclude Include="..\linux\student.h" />
+    <ClInclude Include="..\linux\utf8.h" />
     <ClInclude Include="Classify.h" />
+    <ClInclude Include="constant.h" />
     <ClInclude Include="fontHandler.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="util.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\linux\class.cpp" />
+    <ClCompile Include="..\linux\common.cpp" />
+    <ClCompile Include="..\linux\datafield.cpp" />
+    <ClCompile Include="..\linux\main.cpp" />
+    <ClCompile Include="..\linux\SAtarget.cpp" />
+    <ClCompile Include="..\linux\solution.cpp" />
+    <ClCompile Include="..\linux\stringsplitter.cpp" />
+    <ClCompile Include="..\linux\stringsplitter.test.cpp" />
+    <ClCompile Include="..\linux\student.cpp" />
     <ClCompile Include="Classify.cpp" />
     <ClCompile Include="fontHandler.cpp" />
     <ClCompile Include="stdafx.cpp">
@@ -162,6 +183,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="util.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Classify.rc" />

@@ -4,6 +4,9 @@
 #include "stdafx.h"
 #include "Classify.h"
 #include "fontHandler.h"
+#include "constant.h"
+#include "../linux/gender.h"
+#include "util.h"
 #include <VersionHelpers.h>
 
 #define MAX_LOADSTRING 100
@@ -112,14 +115,14 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    hInst = hInstance; // 将实例句柄存储在全局变量中
 
    HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
-      CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInstance, nullptr);
+	   CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInstance, nullptr);
 
    if (!hWnd)
    {
       return FALSE;
    }
 
-   HWND hButton = CreateWindowW(_T("BUTTON"), _T("选择配置文件"), WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_PUSHBUTTON, 20, 20, 100, 40, hWnd, nullptr, hInstance, nullptr);
+   HWND hButton = CreateWindowW(_T("BUTTON"), _T("选择配置文件"), WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_PUSHBUTTON, 20, 20, 100, 40, hWnd, HMENU(ID_OPENFILE), hInstance, nullptr);
 
    SendMessage(hWnd, WM_SETFONT, reinterpret_cast<WPARAM>(nullptr), MAKELPARAM(0,0));
    ShowWindow(hWnd, nCmdShow);
@@ -140,11 +143,13 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 //
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
-	static HFONT fontYaHei = nullptr;
+	static HFONT currentFont = nullptr;
+	LRESULT ret = 0xDEADBEEF;
     switch (message)
     {
-	case WM_SETFONT:
+	case WM_CREATE:
 		{
+			OutputDebugString(_T("WM_CREATE\n"));
 			// set font of buttons
 			HDC context = GetDC(hWnd);
 			// Use pixel size
@@ -172,32 +177,87 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 			if (ptrYaHei != nullptr) {
 				ptrYaHei->lfHeight = fontHeight;
 				ptrYaHei->lfWidth = 0;
-				fontYaHei = CreateFontIndirectW(reinterpret_cast<LOGFONTW *>(ptrYaHei));
-				bool dont_care = EnumChildWindows(
-					hWnd,
-					SetChildWindowFont,
-					reinterpret_cast<LPARAM>(fontYaHei)
-				);
+				currentFont = CreateFontIndirectW(reinterpret_cast<LOGFONTW *>(ptrYaHei));
 			}
+			ret = DefWindowProc(hWnd, message, wParam, lParam);
 		}
+		break;
+	case WM_SETFONT:
+		if (currentFont != nullptr) {
+			bool dont_care = EnumChildWindows(
+				hWnd,
+				SetChildWindowFont,
+				reinterpret_cast<LPARAM>(currentFont)
+			);
+		}
+		ret = 0;
 		break;
     case WM_COMMAND:
         {
 			OutputDebugString(_T("WM_COMMAND\n"));
-            int wmId = LOWORD(wParam);
+			int content = HIWORD(wParam);
+            int from = LOWORD(wParam);
             // 分析菜单选择: 
-            switch (wmId)
-            {
-            case IDM_ABOUT:
-                DialogBox(hInst, MAKEINTRESOURCE(IDD_ABOUTBOX), hWnd, About);
-                break;
-            case IDM_EXIT:
-                DestroyWindow(hWnd);
+			switch (from) {
+			case IDM_ABOUT:
+				DialogBox(hInst, MAKEINTRESOURCE(IDD_ABOUTBOX), hWnd, About);
+				ret = 0;
+				break;
+			case IDM_EXIT:
+				DestroyWindow(hWnd);
 				OutputDebugString(_T("Destroy window\n"));
-                break;
-            default:
-                return DefWindowProc(hWnd, message, wParam, lParam);
-            }
+				ret = 0;
+				break;
+			case ID_OPENFILE:
+				OutputDebugString(_T("Button\n"));
+				if (false) {
+					openFileDialog_VistaOrLater();
+				}
+				else{
+					OPENFILENAMEW fileInfo;
+					fileInfo.lStructSize = sizeof(fileInfo);
+					fileInfo.hwndOwner = hWnd;
+					fileInfo.hInstance = nullptr;
+					WCHAR filterBuffer[50];
+					memset(filterBuffer, 0, sizeof(filterBuffer));
+					const WCHAR *filter_1_0 = _T("All Files(*.*)\0");
+					const WCHAR *filter_1_1 = _T("*.*\0");
+					int pos = 0;
+					swprintf_s(filterBuffer + pos, sizeof(filterBuffer) / sizeof(filterBuffer[0]) - pos, filter_1_0);
+					pos += wcslen(filter_1_0);
+					filterBuffer[pos++] = _T('\0');
+					swprintf_s(filterBuffer + pos, sizeof(filterBuffer) / sizeof(filterBuffer[0]) - pos, filter_1_1);
+					pos += wcslen(filter_1_1);
+					filterBuffer[pos++] = _T('\0');
+					filterBuffer[pos++] = _T('\0');
+					fileInfo.lpstrFilter = filterBuffer;
+					fileInfo.lpstrCustomFilter = nullptr;
+					fileInfo.nMaxCustFilter = 0;
+					fileInfo.nFilterIndex = 1;
+					WCHAR fileBuffer[SIZE_MAXFILENAME];
+					memset(fileBuffer, 0, sizeof(fileBuffer));
+					fileInfo.lpstrFile = fileBuffer;
+					fileInfo.nMaxFile = sizeof(fileBuffer) / sizeof(fileBuffer[0]);
+					fileInfo.lpstrFileTitle = nullptr;
+					fileInfo.nMaxFileTitle = 0;
+					fileInfo.lpstrTitle = _T("打开文件");
+					fileInfo.lpstrInitialDir = _T(".");
+					fileInfo.Flags = OFN_FILEMUSTEXIST | OFN_LONGNAMES | OFN_NONETWORKBUTTON | OFN_PATHMUSTEXIST;
+					fileInfo.lpTemplateName = nullptr;
+					fileInfo.lpfnHook = nullptr;
+					fileInfo.lCustData = 0;
+					fileInfo.FlagsEx = 0;
+					fileInfo.lpstrDefExt = nullptr;
+
+					GetOpenFileNameW(&fileInfo);
+					OutputDebugString(fileInfo.lpstrFile);
+					OutputDebugString(_T("\n"));
+				}
+				ret = 0;
+				break;
+			default:
+				return DefWindowProc(hWnd, message, wParam, lParam);
+			}
         }
         break;
     case WM_PAINT:
@@ -208,6 +268,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 			OutputDebugString(_T("WM_PAINT\n"));
             EndPaint(hWnd, &ps);
         }
+		ret = 0;
         break;
 	case WM_GETMINMAXINFO:
 		{
@@ -215,17 +276,20 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 			info->ptMinTrackSize.x = 800;
 			info->ptMinTrackSize.y = 600;
 		}
+		ret = 0;
 		break;
     case WM_DESTROY:
-		if (fontYaHei != nullptr) {
-			DeleteObject(fontYaHei);
+		if (currentFont != nullptr) {
+			DeleteObject(currentFont);
 		}
         PostQuitMessage(0);
+		ret = 0;
         break;
     default:
         return DefWindowProc(hWnd, message, wParam, lParam);
     }
-    return 0;
+	assert(ret != 0xDEADBEEF);
+    return ret;
 }
 
 // “关于”框的消息处理程序。
