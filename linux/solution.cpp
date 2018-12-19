@@ -14,7 +14,7 @@ Solution::Solution(double initTemp, double alpha, double stopTemp, int Markov): 
 }
 
 Solution::~Solution(){
-  for(int i = 0; i < vClass.size(); ++i){
+  for(unsigned i = 0; i < vClass.size(); ++i){
     if(vClass[i] != NULL){
       delete vClass[i];
     }
@@ -22,7 +22,7 @@ Solution::~Solution(){
 }
 
 Class * Solution::accessClass(int i){
-  if(i >= 0 && i < vClass.size()){
+  if(i >= 0 && i < (int)vClass.size()){
     return vClass[i];
   }
   else{
@@ -148,14 +148,14 @@ double Solution::evalEntropy(){
   std::vector<double> s2Score;
   double res = 0;
 
-  for(int i = 0; i < vClass.size(); ++i){
+  for(unsigned i = 0; i < vClass.size(); ++i){
     avgMNum += vClass[i]->countMale();
     avgFNum += vClass[i]->countFemale();
   }
   avgMNum /= vClass.size();
   avgFNum /= vClass.size();
 
-  for(int i = 0; i < vClass.size(); ++i){
+  for(unsigned i = 0; i < vClass.size(); ++i){
     s2MNum += (vClass[i]->countMale() - avgMNum) * (vClass[i]->countMale() - avgMNum);
     s2FNum += (vClass[i]->countFemale() - avgFNum) * (vClass[i]->countFemale() - avgFNum);
   }
@@ -167,19 +167,19 @@ double Solution::evalEntropy(){
   
   std::vector<std::vector<double> > avg;
   avg.resize(vClass.size());
-  for(int i = 0; i < vClass.size(); ++i){
+  for(unsigned i = 0; i < vClass.size(); ++i){
     vClass[i]->fillAvgScoreVector(avg[i]);
   }
 
   for(int subject = 0; subject < Student::s_numSubject; ++subject){
-    for(int i = 0; i < vClass.size(); ++i){
+    for(unsigned i = 0; i < vClass.size(); ++i){
       avgScore[subject] += avg[i][subject];
     }
     avgScore[subject] /= vClass.size();
   }
 
   for(int subject = 0; subject < Student::s_numSubject; ++subject){
-    for(int i = 0; i < vClass.size(); ++i){
+    for(unsigned i = 0; i < vClass.size(); ++i){
       s2Score[subject] += (avg[i][subject] - avgScore[subject]) * (avg[i][subject] - avgScore[subject]);
     }
     s2Score[subject] /= vClass.size();
@@ -189,14 +189,14 @@ double Solution::evalEntropy(){
   double avgTotal = 0;
   double s2Total = 0;
   double temp = 0;
-  for(int i = 0; i < vClass.size(); ++i){
+  for(unsigned i = 0; i < vClass.size(); ++i){
     for(int subject = 0; subject < Student::s_numSubject; ++subject){
       avgTotal += avg[i][subject];
     }
   }
   avgTotal /= vClass.size();
 
-  for(int i = 0; i < vClass.size(); ++i){
+  for(unsigned i = 0; i < vClass.size(); ++i){
     temp = 0;
     for(int subject = 0; subject < Student::s_numSubject; ++subject){
       temp += avg[i][subject];
@@ -249,7 +249,7 @@ void Solution::run(){
 }
 
 void Solution::deleteAllStudents(){
-  for(int i = 0; i < vClass.size(); ++i){
+  for(unsigned i = 0; i < vClass.size(); ++i){
     vClass[i]->deleteAllMembers();
   }
 }
@@ -281,7 +281,7 @@ std::wostream & operator << (std::wostream &wos, const Solution &s){
 
 std::ostream & operator << (std::ostream &os, const Solution &s){
   os << u8">>>>>方案开始>>>>>" << std::endl;
-  for(int i = 0; i < s.vClass.size(); ++i){
+  for(unsigned i = 0; i < s.vClass.size(); ++i){
     os << "=====" << i << u8"班" << "=====" << std::endl;
     os << *(s.vClass[i]);
   }
