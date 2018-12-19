@@ -7,16 +7,16 @@
 #include "constant.h"
 #include "../linux/gender.h"
 #include "util.h"
-#include <VersionHelpers.h>	
+#include <VersionHelpers.h>
 
 #define MAX_LOADSTRING 100
 
-// 全局变量: 
+// 全局变量:
 HINSTANCE hInst;                                // 当前实例
 WCHAR szTitle[MAX_LOADSTRING];                  // 标题栏文本
 WCHAR szWindowClass[MAX_LOADSTRING];            // 主窗口类名
 
-// 此代码模块中包含的函数的前向声明: 
+// 此代码模块中包含的函数的前向声明:
 ATOM                MyRegisterClass(HINSTANCE hInstance);
 BOOL                InitInstance(HINSTANCE, int);
 LRESULT CALLBACK    WndProc(HWND, UINT, WPARAM, LPARAM);
@@ -41,7 +41,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     LoadStringW(hInstance, IDC_CLASSIFY, szWindowClass, MAX_LOADSTRING);
     MyRegisterClass(hInstance);
 
-    // 执行应用程序初始化: 
+    // 执行应用程序初始化:
     if (!InitInstance (hInstance, nCmdShow))
     {
         return FALSE;
@@ -57,7 +57,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
     MSG msg;
 
-    // 主消息循环: 
+    // 主消息循环:
     while (GetMessage(&msg, nullptr, 0, 0))
     {
         if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg))
@@ -105,7 +105,7 @@ ATOM MyRegisterClass(HINSTANCE hInstance)
 //
 //   目的: 保存实例句柄并创建主窗口
 //
-//   注释: 
+//   注释:
 //
 //        在此函数中，我们在全局变量中保存实例句柄并
 //        创建和显示主程序窗口。
@@ -197,7 +197,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 			OutputDebugString(_T("WM_COMMAND\n"));
 			int content = HIWORD(wParam);
             int from = LOWORD(wParam);
-            // 分析菜单选择: 
+            // 分析菜单选择:
 			switch (from) {
 			case IDM_ABOUT:
 				DialogBox(hInst, MAKEINTRESOURCE(IDD_ABOUTBOX), hWnd, About);
