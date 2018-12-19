@@ -242,9 +242,9 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 					fileInfo.nMaxFileTitle = 0;
 					fileInfo.lpstrTitle = _T("打开文件");
 					fileInfo.lpstrInitialDir = _T(".");
-					fileInfo.Flags = OFN_FILEMUSTEXIST | OFN_LONGNAMES | OFN_NONETWORKBUTTON | OFN_PATHMUSTEXIST;
+					fileInfo.Flags = OFN_FILEMUSTEXIST | OFN_LONGNAMES | OFN_NONETWORKBUTTON | OFN_PATHMUSTEXIST | OFN_ENABLEHOOK;
 					fileInfo.lpTemplateName = nullptr;
-					fileInfo.lpfnHook = nullptr;
+					fileInfo.lpfnHook = FakeHook;
 					fileInfo.lCustData = 0;
 					fileInfo.FlagsEx = 0;
 					fileInfo.lpstrDefExt = nullptr;
@@ -256,7 +256,8 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 				ret = 0;
 				break;
 			default:
-				return DefWindowProc(hWnd, message, wParam, lParam);
+				ret = DefWindowProc(hWnd, message, wParam, lParam);
+				break;
 			}
         }
         break;
@@ -286,7 +287,8 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		ret = 0;
         break;
     default:
-        return DefWindowProc(hWnd, message, wParam, lParam);
+        ret = DefWindowProc(hWnd, message, wParam, lParam);
+		break;
     }
 	assert(ret != 0xDEADBEEF);
     return ret;
