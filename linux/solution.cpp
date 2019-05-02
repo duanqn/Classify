@@ -66,7 +66,7 @@ void Solution::applyRandomMove(){
     try{
       s1 = vClass[c1]->popRandomFreeElement();
     }
-    catch(duanqn::ERRCODE &code){
+    catch(duanqn::ERRCODE &){
       successful = false;
       continue;
     }
@@ -74,7 +74,7 @@ void Solution::applyRandomMove(){
     try{
       s2 = vClass[c2]->popRandomFreeElement();
     }
-    catch(duanqn::ERRCODE &code){
+    catch(duanqn::ERRCODE &){
       vClass[c1]->append(s1);  // undo pop
       successful = false;
       continue;

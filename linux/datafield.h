@@ -12,18 +12,18 @@ struct DataContent{
   char * info; // type = info, info_unique or dump
   double score;     // type = score
   Gender gender;    // type = gender
-  DataContent(){
+  DataContent() noexcept {
     gender = Gender::Male;
     score = 0;
     info = nullptr;
   }
-  DataContent(DataContent && d){
+  DataContent(DataContent && d) noexcept {
     gender = d.gender;
     score = d.score;
     info = d.info;
     d.info = nullptr;
   }
-  DataContent& operator = (DataContent && d){
+  DataContent& operator = (DataContent && d) noexcept {
     gender = d.gender;
     score = d.score;
     info = d.info;
@@ -44,10 +44,10 @@ struct DataField{
   DataField(): value(){
     type = DataType::DUMP;
   }
-  DataField(DataField && d): value(std::move(d.value)){
+  DataField(DataField && d) noexcept : value(std::move(d.value)){
     type = d.type;
   }
-  DataField& operator = (DataField && d){
+  DataField& operator = (DataField && d) noexcept {
     type = d.type;
     value = std::move(d.value);
     return *this;
