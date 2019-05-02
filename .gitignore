@@ -22,6 +22,7 @@ Release
 
 # Editor config files
 *.aps
+.leu
 
 # Experimental files
 winmain.cpp

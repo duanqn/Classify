@@ -71,12 +71,12 @@ void Class::fillAvgScoreVector(std::vector<double> &res) const {
   std::vector<double> score;
   for(auto it = m_students.begin(); it != m_students.end(); ++it){
     (*it)->fillScoreVector(score);
-    for(int i = 0; i < res.size(); ++i){
+    for(unsigned i = 0; i < res.size(); ++i){
       res[i] += score[i];
     }
   }
 
-  for(int i = 0; i < res.size(); ++i){
+  for(unsigned i = 0; i < res.size(); ++i){
     res[i] /= m_students.size();
   }
 }
@@ -104,7 +104,7 @@ std::ostream & operator << (std::ostream & os, const Class &c){
   std::vector<double> avgs;
   c.fillAvgScoreVector(avgs);
   double overall = 0;
-  for(int i = 0; i < avgs.size(); ++i){
+  for(unsigned i = 0; i < avgs.size(); ++i){
     if(i > 0){
       os << " ";
     }
