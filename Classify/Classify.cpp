@@ -52,7 +52,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     if (!IsWindows8OrGreater())
     {
         MessageBox(NULL, _T("You need at least Windows 8"), _T("Version Not Supported"), MB_OK);
-        goto fail;
+		return 1;
     }
 
     MSG msg;
@@ -68,7 +68,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     }
 
     OutputDebugString(_T("退出\n"));
-fail:
     return (int) msg.wParam;
 }
 
@@ -214,44 +213,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
                     openFileDialog_VistaOrLater();
                 }
                 else{
-                    OPENFILENAMEW fileInfo;
-                    fileInfo.lStructSize = sizeof(fileInfo);
-                    fileInfo.hwndOwner = hWnd;
-                    fileInfo.hInstance = nullptr;
-                    WCHAR filterBuffer[50];
-                    memset(filterBuffer, 0, sizeof(filterBuffer));
-                    const WCHAR *filter_1_0 = _T("All Files(*.*)\0");
-                    const WCHAR *filter_1_1 = _T("*.*\0");
-                    int pos = 0;
-                    swprintf_s(filterBuffer + pos, sizeof(filterBuffer) / sizeof(filterBuffer[0]) - pos, filter_1_0);
-                    pos += wcslen(filter_1_0);
-                    filterBuffer[pos++] = _T('\0');
-                    swprintf_s(filterBuffer + pos, sizeof(filterBuffer) / sizeof(filterBuffer[0]) - pos, filter_1_1);
-                    pos += wcslen(filter_1_1);
-                    filterBuffer[pos++] = _T('\0');
-                    filterBuffer[pos++] = _T('\0');
-                    fileInfo.lpstrFilter = filterBuffer;
-                    fileInfo.lpstrCustomFilter = nullptr;
-                    fileInfo.nMaxCustFilter = 0;
-                    fileInfo.nFilterIndex = 1;
-                    WCHAR fileBuffer[SIZE_MAXFILENAME];
-                    memset(fileBuffer, 0, sizeof(fileBuffer));
-                    fileInfo.lpstrFile = fileBuffer;
-                    fileInfo.nMaxFile = sizeof(fileBuffer) / sizeof(fileBuffer[0]);
-                    fileInfo.lpstrFileTitle = nullptr;
-                    fileInfo.nMaxFileTitle = 0;
-                    fileInfo.lpstrTitle = _T("打开文件");
-                    fileInfo.lpstrInitialDir = _T(".");
-                    fileInfo.Flags = OFN_FILEMUSTEXIST | OFN_LONGNAMES | OFN_NONETWORKBUTTON | OFN_PATHMUSTEXIST | OFN_ENABLEHOOK;
-                    fileInfo.lpTemplateName = nullptr;
-                    fileInfo.lpfnHook = FakeHook;
-                    fileInfo.lCustData = 0;
-                    fileInfo.FlagsEx = 0;
-                    fileInfo.lpstrDefExt = nullptr;
-
-                    GetOpenFileNameW(&fileInfo);
-                    OutputDebugString(fileInfo.lpstrFile);
-                    OutputDebugString(_T("\n"));
+					openFileDialog_BeforeVista(hWnd);
                 }
                 ret = 0;
                 break;

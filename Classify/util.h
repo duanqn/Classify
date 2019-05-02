@@ -1,5 +1,6 @@
 #pragma once
-bool openFileDialog_BeforeVista();
+#include "constant.h"
+bool openFileDialog_BeforeVista(HWND window);
 bool openFileDialog_VistaOrLater();
 UINT_PTR CALLBACK FakeHook(
 	_In_ HWND   hdlg,
